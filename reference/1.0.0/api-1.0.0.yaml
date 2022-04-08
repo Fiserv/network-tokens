@@ -13,8 +13,8 @@ paths:
     x-model-version: 1.0
     post:
       tags: [ TEST Queue Token Endpoint Definition ]
-      x-group-name: Queue Token
-      x-proxy-name: queue-tokens
+      x-group-name: Tokens
+      x-proxy-name: Asynch-Token
       summary: Queue a provision token request.
       description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
       parameters:
