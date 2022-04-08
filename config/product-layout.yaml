@@ -29,42 +29,53 @@
 ################################################################################
 header:
   productName: Network Tokens
-  productionDescription: REPLACEME
-  whoIsItFor: REPLACEME
+  productionDescription: Network Tokens are provided by the Card Networks in lieu of the cardholder’s PAN, Also known as EMVCo Tokens or Payment Tokens.
+  Network Tokens move through the payment networks in the same way as a PAN, allowing transactions to occur without the merchant being exposed to the underlying PAN. It can be used for credential on file payments (CNP)
+
+whoIsItFor: This is for merchants all the merchants who do not want transact with PAN and wants to improve overall approval of the transactions.
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
     altText: REPLACEME™
 featuredFeatures:
   - title: REPLACE ME
     description:  REPLACE ME
-    tags: ["REPLACEME", "REPLACEME", "REPLACEME"]
-    bullets: ["REPLACEME", "REPLACEME" ]  
+    tags: ["Asynch-Tokenization", "Synch-Tokenization", "Token-Lifecycle"]
+    bullets: ["Asynch-Tokenization", "Synch-Tokenization" ]
     relatedDocs:
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME1.md
+        title: Asynch-Tokenization
+        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: ./docs/asynchTokenization.md
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME2.md
+        title: Synch-Tokenization
+        description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: ./docs/synchTokenization.md
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME3.md
+        title: Token-Lifecycle
+        description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
+        link: ./docs/merchantlcm.md
+      - relatedDoc:
+        title: Token-Cryptogram
+        description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
+        link: ./docs/cryptogram.md
     relatedAPIs:
       - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
-        type: "patch"        
-        path: "/v1/REPLACEME1"
+        title: Asynch-Tokenization
+        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+        type: "post"
+        path: "/mtrg/v1/trids/{id}/queue-tokens"
       - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
+        title: Synch-Tokenization
+        description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
         type: "post"        
-        path: "/v1/REPLACEME2"
+        path: "/mtrg/v1/trids/{id}/network-tokens"
       - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
-        type: "get"        
-        path: "/v1/REPLACEME3"
+        title: Token-Lifecycle
+        description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
+        type: "patch"
+        path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}"
+      - relatedAPI:
+        title: Token-Cryptogram
+        description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
+        type: "poat"
+        path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}/cryptogram"
