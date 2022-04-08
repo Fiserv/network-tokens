@@ -353,6 +353,7 @@ components:
                        type: string,
                        example: "2021-09-28T09:07:44.716+00:00"}
 
+
     Provision:
       x-model-version: 1.0
       description: Provision card information.
@@ -504,7 +505,7 @@ components:
     TokenInfo:
       description: Information related to network Tokens and reference Ids.
       type: object
-      readOnly: true
+      writeOnly: true
       required:
         - token
       properties:
@@ -516,30 +517,30 @@ components:
     Token:
       description: Information related to network Tokens
       type: object
-      readOnly: true
+      writeOnly: true
       properties:
         tokenReferenceId:
           description: A unique reference assigned following the allocation of a token used to identify the token for the duration of its lifetime.
           type: string
           example: "5001a9f027e5629d11e3949a0800a"
-          readOnly: true
+          writeOnly: true
         expiryDate:
           $ref: '#/components/schemas/ExpiryDate'
         alias:
           description: Last four values of the token
           type: string
           example: "1111"
-          readOnly: true
+          writeOnly: true
         paymentAccountReferenceId:
           description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by netwroks or the Issuer provides PAR in the authorization message response.
           type: string
-          readOnly: true
+          writeOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
         tokenRequestorId:
           description: Unique ID that identifies the entity for which the token request is being conducted.
           type: string
           maximum: 11
-          readOnly: true
+          writeOnly: true
           example: "2901"
         fiservTokenRequestorId:
           description: Unique ID mapes to tokenRequestorId. Unique per merchant.
@@ -550,35 +551,18 @@ components:
         paymentToken:
           description: The Token for a PAN. This should be used for auth.
           type: string
-          readOnly: true
+          writeOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
         pushAccountReceipt:
           description: This attribute is used only in case of push provisioning used case. The value of the attribute should be provided in case of PAN details.
           type: string
-          readOnly: true
+          writeOnly: true
           example: "6001a9f027e5629d11e3949a0800a"
         provisionTokenId:
           description: This will be returned only for VISA tokenization.
           type: string
-          readOnly: true
-          example: "6001a9f027e5629d11e3949a0800a"
-
-    UpdateReason:
-      description: Information related to network Tokens
-      type: object
-      required:
-        - causedBy
-        - reasonCode
-      properties:
-        causedBy:
-          $ref: '#/components/schemas/CausedBy'
-        reasonCode:
-          $ref: '#/components/schemas/ReasonCode'
-        reason:
-          description: Free form reason why the Tokens are being suspended.
-          type: string
-          example: "Lost/stolen device"
           writeOnly: true
+          example: "6001a9f027e5629d11e3949a0800a"
 
 
     TokenStatus:
