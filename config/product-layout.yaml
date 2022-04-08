@@ -30,7 +30,7 @@
 header:
   productName: Network Tokens
   productionDescription: Network Tokens services are provided by the Card Networks in lieu of the cardholder’s PAN, Also known as EMVCo Tokens or Payment Tokens.Network Tokens move through the payment networks in the same way as a PAN, allowing transactions to occur without the merchant being exposed to the underlying PAN. It can be used for credential on file payments (CNP)
-  whoIsItFor: This is for merchants all the merchants who do not want transact with PAN and wants to improve overall approval of the transactions.
+  whoIsItFor: Netwrok Tokens provides better Auth/Sale transaction compared to traditioanl PAN based transaction and provdes ehnanced security overall.
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
     altText: REPLACEME™
