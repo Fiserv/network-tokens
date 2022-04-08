@@ -30,6 +30,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
+              examples:
+                QueueToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationResponse'}
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -57,6 +59,8 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            examples:
+              ProvisionToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse'}
       responses:
         201:
           description: Token created successfully
@@ -697,7 +701,6 @@ components:
       required:
         - operation
         - updateReason
-        - tspId
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
@@ -729,7 +732,6 @@ components:
       description: Create CryptoGram request object model.
       type: object
       required:
-        - tspId
         - transactionType
       properties:
         transactionType:
@@ -835,3 +837,39 @@ components:
         - TOKEN_FOR_TOKEN
         - CARD_ADDED_VIA_APPLICATION
         - BATCH
+
+  examples:
+    AsyncTokenizationResponse:
+      value:
+        clientRequestId: '2021-09-28T09:07:44.716+00:00'
+        provisionRequestId: '2021-09-28T09:07:44.716+00:00'
+        cardBrand: VI
+        createdDate: '2021-09-28T09:07:44.716+00:00'
+
+    SyncTokenizationResponse:
+      value:
+        provision:
+          card:
+            alias: '4567'
+            cardBrandLogoAssetId: SOME_RANDOM_ID
+            cardBrandDescription: SHORT_DESCRIPTION
+            expiryDate:
+              month: '09'
+              year: '20'
+          tokenInfo:
+            decision: ACTIVE
+            token:
+              tokenReferenceId: 5001a9f027e5629d11e3949a0800a
+              expiryDate:
+                month: '09'
+                year: '20'
+              alias: '1111'
+              paymentAccountReferenceId: 5001a9f027e5629d11e3949a0800a
+              tokenRequestorId: '2901'
+              fiservTokenRequestorId: MSTF-2901
+              paymentToken: 5001a9f027e5629d11e3949a0800a
+              pushAccountReceipt: 6001a9f027e5629d11e3949a0800a
+              provisionTokenId: 6001a9f027e5629d11e3949a0800a
+          transactionType: ECOM
+        cardBrand: VI
+      
