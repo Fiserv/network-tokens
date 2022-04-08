@@ -89,7 +89,6 @@ paths:
         - {$ref: '#/components/parameters/ClientRequestIdHeader'}
         - {$ref: '#/components/parameters/XCardBrandHeader'}
         - {$ref: '#/components/parameters/TokenReferenceId'}
-
       requestBody:
         required: true
         content:
@@ -101,6 +100,39 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/NoContent' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        429: { $ref: '#/components/responses/TooManyRequest' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /trids/{id}/network-tokens/{tokenReferenceId}/cryptogram:
+    post:
+      tags: [ Token Cryptogram Endpoint Definition ]
+      x-group-name: Tokens
+      x-proxy-name: Token-Cryptogram
+      summary: Cryptogram request for CIT transactions
+      description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
+      parameters:
+        - {$ref: '#/components/parameters/TRIDParam'}
+        - {$ref: '#/components/parameters/ContentTypeHeader'}
+        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
+        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
+        - {$ref: '#/components/parameters/XCardBrandHeader'}
+        - {$ref: '#/components/parameters/TokenReferenceId'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CryptoGramRequest' }
+      responses:
+        204:
+          description: Token status updated successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CryptoGramResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -701,7 +733,35 @@ components:
           example: "Lost/stolen device"
           writeOnly: true
 
+    CryptoGramRequest:
+      x-model-version: 1.0
+      description: Create CryptoGram request object model.
+      type: object
+      required:
+        - tspId
+        - transactionType
+      properties:
+        transactionType:
+          $ref: '#/components/schemas/TransactionType'
+        cardBrand:
+          $ref: '#/components/schemas/CardBrand'
+        merchantInfo:
+          $ref: '#/components/schemas/MerchantInfo'
+        customerInfo:
+          $ref: '#/components/schemas/CustomerInfo'
 
+    CryptoGramResponse:
+      x-model-version: 1.0
+      description: Create CryptoGram resposne object model.
+      type: object
+      required:
+        - token
+        - crypto
+      properties:
+        token:
+          $ref: '#/components/schemas/Token'
+        crypto:
+          $ref: '#/components/schemas/CryptoGram'
     #-------------------------------------
     # ENUM Models
     #-------------------------------------
