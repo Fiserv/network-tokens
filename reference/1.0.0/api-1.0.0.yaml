@@ -12,7 +12,7 @@ paths:
   /trids/{id}/queue-tokens:
     x-model-version: 1.0
     post:
-      tags: [ TEST Queue Token Endpoint Definition ]
+      tags: [ Asynchronous Tokenization Endpoint Definition ]
       x-group-name: Tokens
       x-proxy-name: Asynch-Token
       summary: Queue a provision token request.
@@ -34,6 +34,39 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        429: { $ref: '#/components/responses/TooManyRequest' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /trids/{id}/network-tokens:
+    x-model-version: 1.0
+    post:
+      tags: [ Synchronous Tokenization Endpoint Definition ]
+      x-group-name: Tokens
+      x-proxy-name: Synch-Token
+      summary: Token On the go request
+      description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
+      parameters:
+        - {$ref: '#/components/parameters/TRIDParam'}
+        - {$ref: '#/components/parameters/ContentTypeHeader'}
+        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
+        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
+        - {$ref: '#/components/parameters/XCardBrandHeader'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -321,6 +354,19 @@ components:
           minItems: 0
           items: { type: string, description: list of items}
 
+    ProvisionTokenResponse:
+      x-model-version: 1.0
+      description: Provision resposne object model
+      type: object
+      required:
+        - provision
+      properties:
+        provision:
+          $ref: '#/components/schemas/Provision'
+        crypto:
+          $ref: '#/components/schemas/CryptoGram'
+        cardBrand:
+          $ref: '#/components/schemas/CardBrand'
 
     ProvisionTokenRequest:
       x-model-version: 1.0
