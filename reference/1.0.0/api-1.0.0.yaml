@@ -484,7 +484,7 @@ components:
       type: object
       required:
         - card
-        - cryptoRequired
+        - cryptogramRequired
       properties:
         card:
           $ref: '#/components/schemas/Card'
