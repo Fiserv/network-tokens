@@ -79,7 +79,7 @@ paths:
     patch:
       tags: [ Token Lifecycle Endpoint Definition ]
       x-group-name: Tokens
-      x-proxy-name: Token-Lifecycle
+      x-proxy-name: Lifecycle
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
       parameters:
@@ -112,7 +112,7 @@ paths:
     post:
       tags: [ Token Cryptogram Endpoint Definition ]
       x-group-name: Tokens
-      x-proxy-name: Token-Cryptogram
+      x-proxy-name: Cryptogram
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
       parameters:
