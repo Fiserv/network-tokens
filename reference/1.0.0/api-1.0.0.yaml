@@ -501,7 +501,7 @@ components:
 
     CryptoGramRequired:
       description: Unique ID mapes to tokenRequestorId. Unique per merchant.
-      type: string
+      type: boolean
       maximum: 11
       readOnly: true
       example: true
