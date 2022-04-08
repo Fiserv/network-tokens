@@ -59,14 +59,14 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
-            examples:
-              ProvisionToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse'}
       responses:
         201:
           description: Token created successfully
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
+              examples:
+                ProvisionToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse'}
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -128,11 +128,13 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
       responses:
-        204:
+        200:
           description: Token status updated successfully.
           content:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
+              examples:
+                Cryptogram: {summary: Asynch Token Respsone, $ref: '#/components/examples/CryptogramResposne'}
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -872,4 +874,20 @@ components:
               provisionTokenId: 6001a9f027e5629d11e3949a0800a
           transactionType: ECOM
         cardBrand: VI
+
+    CryptogramResposne:
+      value:
+        token:
+          fiservTokenRequestorId: AAA008UU
+          expiryDate:
+            month: '04'
+            year: '25'
+            date: '30'
+          tokenRequestorId: '50175692476'
+          paymentToken: '5204736200176909'
+          panSequenceNumber: '00'
+          track2Equivalent: 5204736200176909D25041000000000000000F
+        crypto:
+          cryptogram: ABpQmfNkuzAqAAKxV1JzAAADFA==
+
       
