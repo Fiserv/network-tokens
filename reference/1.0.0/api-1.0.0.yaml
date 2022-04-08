@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info: { title: API Explorer, description: This Specification document lists the APIs required for provision a token for a PAN getting Cryptogram for a token and Lifecycle management for the provisioned token., version: 1.0.0 }
 servers:
-- { url: 'https://api.fiservapps.com', description: Production }
-- { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
-- { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
+  - { url: 'https://api.fiservapps.com', description: Production }
+  - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
+  - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
   /mtrg/v1/trids/{id}/queue-tokens:
     x-model-version: 1.0
@@ -510,7 +510,6 @@ components:
       x-model-version: 1.0
       description: Information about merchant - Required only for Rupay.
       type: object
-      writeOnly: true
       required:
         - merchantId
         - merchantName
@@ -530,7 +529,6 @@ components:
       x-model-version: 1.0
       description: Information about customer - Required Only for Rupay.
       type: object
-      writeOnly: true
       required:
         - consumerId
       properties:
@@ -544,7 +542,6 @@ components:
       x-model-version: 1.0
       description: Information about Auth transaction - Required Only for Rupay.
       type: object
-      writeOnly: true
       required:
         - authRefNo
       properties:
