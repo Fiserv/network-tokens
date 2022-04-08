@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info: { title: API Explorer, description: This Specification document lists the APIs required for provision a token for a PAN getting Cryptogram for a token and Lifecycle management for the provisioned token., version: 1.0.0 }
 servers:
-- { url: 'https://api.fiservapps.com', description: Production }
-- { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
-- { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
+  - { url: 'https://api.fiservapps.com', description: Production }
+  - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
+  - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
   /mtrg/v1/trids/{id}/queue-tokens:
     x-model-version: 1.0
@@ -24,6 +24,8 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            examples:
+              QueueToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/ProvisionTokenRequest'}
       responses:
         201:
           description: Token request saved successfully.
@@ -59,6 +61,8 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            examples:
+              ProvisionToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/ProvisionTokenRequest'}
       responses:
         201:
           description: Token created successfully
@@ -94,6 +98,8 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
+            examples:
+              LifeCycle: {summary: Asynch Token Respsone, $ref: '#/components/examples/UpdateTokenRequest'}
       responses:
         204:
           description: Token status updated successfully.
@@ -127,6 +133,8 @@ paths:
         content:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
+            examples:
+              Cryptogram: {summary: Asynch Token Respsone, $ref: '#/components/examples/CryptoGramRequest'}
       responses:
         200:
           description: Token status updated successfully.
@@ -889,4 +897,32 @@ components:
           track2Equivalent: 5204736200176909D25041000000000000000F
         crypto:
           cryptogram: ABpQmfNkuzAqAAKxV1JzAAADFA==
+
+    CryptoGramRequest:
+      value:
+        transactionType: ECOM
+        cardBrand: MC
+
+    ProvisionTokenRequest:
+      value:
+        provision:
+          card:
+            cardNumber: '5204736190003139'
+            expiryDate:
+              month: '12'
+              year: '22'
+          panSource: CARD_ON_FILE
+          transactionType: ECOM
+          cryptogramRequired: 'false'
+        cardBrand: MC
+
+    UpdateTokenRequest:
+      value:
+        operation: RESUME
+        updateReason:
+          causedBy: CARDHOLDER
+          reasonCode: OTHER
+          reason: Lost/stolen device
+        cardBrand: MC
+
 
