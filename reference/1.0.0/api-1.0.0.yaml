@@ -381,9 +381,10 @@ components:
       type: string
       maximum: 11
       readOnly: true
-      example: "MSTF-2901"
+      example: true
 
     MerchantInfo:
+      x-model-version: 1.0
       description: Information about merchant - Required only for Rupay.
       type: object
       writeOnly: true
@@ -403,6 +404,7 @@ components:
           maximum: 45
 
     CustomerInfo:
+      x-model-version: 1.0
       description: Information about customer - Required Only for Rupay.
       type: object
       writeOnly: true
@@ -416,6 +418,7 @@ components:
           maximum: 64
 
     AuthorizationInfo:
+      x-model-version: 1.0
       description: Information about Auth transaction - Required Only for Rupay.
       type: object
       writeOnly: true
@@ -429,6 +432,7 @@ components:
           maximum: 36
 
     Card:
+      x-model-version: 1.0
       description: Information on a credit account
       type: object
       required:
@@ -460,6 +464,7 @@ components:
           $ref: '#/components/schemas/ExpiryDate'
 
     CryptoGram:
+      x-model-version: 1.0
       description: Cryptogram resposne to merchant.
       type: object
       required:
@@ -478,6 +483,7 @@ components:
           example: "12345"
 
     ExpiryDate:
+      x-model-version: 1.0
       description: Contains account expiration data and needs to either send the values in individual fields OR as a singleValue.
       type: object
       required:
@@ -500,6 +506,7 @@ components:
           example: "20"
 
     TokenInfo:
+      x-model-version: 1.0
       description: Information related to network Tokens and reference Ids.
       type: object
       writeOnly: true
@@ -512,6 +519,7 @@ components:
           $ref: '#/components/schemas/Token'
 
     Token:
+      x-model-version: 1.0
       description: Information related to network Tokens
       type: object
       writeOnly: true
@@ -563,9 +571,11 @@ components:
 
 
     TokenStatus:
+      x-model-version: 1.0
       description: Indicates the status of an token.
       type: string
       readOnly: true
+      example: ACTIVE
       enum:
         - ACTIVE
         - INACTIVE
@@ -575,9 +585,10 @@ components:
         - APPROVED
 
     Operation:
+      x-model-version: 1.0
       description: Indicates the type of operation to be performed. Applicable values are defined belo.
       type: string
-      writeOnly: true
+      example: SUSPEND
       enum:
         - SUSPEND
         - RESUME
@@ -586,8 +597,10 @@ components:
         - UPDATE
 
     CardBrand:
+      x-model-version: 1.0
       description: A reference id provided to merchant in the response. This is to identtify source of tokenReferenceId. probabile values are define as enum.
       type: string
+      example: VI
       enum:
         - VI
         - AX
@@ -596,32 +609,38 @@ components:
         - RU
 
     CausedBy:
+      x-model-version: 1.0
       description: Who or what caused the Token to be suspended. Must be either the 'CARDHOLDER' (operation requested by the Cardholder) or 'TOKEN_REQUESTOR' (operation requested by the token requestor).
       type: string
+      example: CARDHOLDER
       enum:
         - CARDHOLDER
         - TOKEN_REQUESTOR
 
     ReasonCode:
+      x-model-version: 1.0
       description: The reason for the action to be suspended. Must be one of 'SUSPECTED_FRAUD' (suspected fraudulent token transactions), 'OTHER' (Other - default used if value not provided).
       type: string
+      example: FRAUD
       enum:
         - FRAUD
         - CUSTOMER_CONFIRMED
         - OTHER
 
     TransactionType:
+      x-model-version: 1.0
       description: ECOM-e-commercetransactiontype.Tobe used with web flows.RECURRING-Recurringpayment. If not provided in request, default value will be ECOM
       type: string
-      writeOnly: true
+      example: ECOM
       enum:
         - ECOM
         - RECURRING
 
     PanSource:
+      x-model-version: 1.0
       description: Source of the payment instrument (PAN). This enum value specifies the source and the method used to provide the payment instrument data. If not provided in request, default value will be CARD_ON_FILE
       type: string
-      writeOnly: true
+      example: CARD_ON_FILE
       enum:
         - CARD_ON_FILE
         - CARD_ADDED_MANUALLY
