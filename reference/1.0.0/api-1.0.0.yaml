@@ -106,6 +106,8 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/NoContent' }
+              examples:
+                LifeCycle: { summary: Lifecycle Token Response, $ref: '#/components/examples/NoContent' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -924,3 +926,7 @@ components:
           reasonCode: OTHER
           reason: Lost/stolen device
         cardBrand: MC
+
+    NoContent:
+      value:
+
