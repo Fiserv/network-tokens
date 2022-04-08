@@ -444,22 +444,21 @@ components:
           description: Primary account number, can only be sent when vaulting an account.  This field will NOT be present in responses.
           type: string
           example: "4111111111111111"
-          writeOnly: true
         alias:
           description: Last four values of the cardNumber
           type: string
-          readOnly: true
+          writeOnly: true
           example: "4567"
         cardBrandLogoAssetId:
           description: Asset associated with Card.
           type: string
           example: "SOME_RANDOM_ID"
-          readOnly: true
+          writeOnly: true
         cardBrandDescription:
           description: A short description for this product. Always returned in Product Configuration object.
           type: string
           example: "SHORT_DESCRIPTION"
-          readOnly: true
+          writeOnly: true
         expiryDate:
           $ref: '#/components/schemas/ExpiryDate'
 
