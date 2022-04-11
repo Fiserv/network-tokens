@@ -517,8 +517,7 @@ components:
 
     CryptoGramRequired:
       description: Unique ID mapes to tokenRequestorId. Unique per merchant.
-      type: string
-      maximum: 11
+      type: boolean
       example: false
 
     MerchantInfo:
@@ -915,7 +914,7 @@ components:
               year: '22'
           panSource: CARD_ON_FILE
           transactionType: ECOM
-          cryptogramRequired: 'false'
+          cryptogramRequired: false
         cardBrand: MC
 
     UpdateTokenRequest:
