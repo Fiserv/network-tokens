@@ -25,7 +25,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              QueueToken: { summary: Asynch Token Request, $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -33,7 +33,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
               examples:
-                QueueToken: { summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationMockResponse' }
+                QueueToken: { $ref: '#/components/examples/AsyncTokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -62,7 +62,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              ProvisionToken: { summary: Provision Token Request, $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              ProvisionToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token created successfully
@@ -70,7 +70,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
               examples:
-                ProvisionToken: { summary: Provision Token Respsone, $ref: '#/components/examples/TokenizationMockResponse' }
+                ProvisionToken: { $ref: '#/components/examples/TokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -99,7 +99,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
             examples:
-              LifeCycle: { summary: Lifecycle Token Request, $ref: '#/components/examples/UpdateTokenMockRequest' }
+              LifeCycle: { $ref: '#/components/examples/UpdateTokenMockRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -107,7 +107,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/NoContent' }
               examples:
-                LifeCycle: { summary: Lifecycle Token Response, $ref: '#/components/examples/NoContent' }
+                LifeCycle: { $ref: '#/components/examples/NoContent' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -136,7 +136,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
             examples:
-              Cryptogram: { summary: CryptoGram Resquest, $ref: '#/components/examples/CryptoGramMockRequest' }
+              Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
       responses:
         200:
           description: Token status updated successfully.
@@ -144,7 +144,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
               examples:
-                Cryptogram: { summary: CryptoGram Token Respsone, $ref: '#/components/examples/CryptogramMockResposne' }
+                Cryptogram: { $ref: '#/components/examples/CryptogramMockResposne' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
