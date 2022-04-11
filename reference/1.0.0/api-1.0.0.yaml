@@ -25,7 +25,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              Default: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -62,7 +62,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              Default: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              ProvisionToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token created successfully
@@ -99,7 +99,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
             examples:
-              Default: { $ref: '#/components/examples/UpdateTokenMockRequest' }
+              LifeCycle: { $ref: '#/components/examples/UpdateTokenMockRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -136,7 +136,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
             examples:
-              Default: { $ref: '#/components/examples/CryptoGramMockRequest' }
+              Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
       responses:
         200:
           description: Token status updated successfully.
@@ -569,7 +569,6 @@ components:
       type: object
       required:
         - card
-        - cryptogramRequired
       properties:
         card:
           $ref: '#/components/schemas/Card'
