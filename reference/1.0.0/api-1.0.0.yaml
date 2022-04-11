@@ -124,14 +124,14 @@ components:
       description: API key provided to the merchant associating the requests with
         the appropriate app in the Developer Portal.
     XCardBrandHeader:
-      x-model-version: 1.0
       name: X-Card-Brand
-      schema: { type: string }
       in: header
-      required: true
       description: API key provided to the merchant associating the requests with
         the appropriate app in the Developer Portal.
-      example: "VI"
+      required: true
+      schema:
+        type: string
+        example: "VI"
   #-------------------------------------
   # Common Models
   #-------------------------------------
