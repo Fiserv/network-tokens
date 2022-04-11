@@ -10,22 +10,23 @@ paths:
     post:
       tags: [ Asynchronous Tokenization Endpoint Definition ]
       x-group-name: Tokens
-      x-proxy-name: Asynch-Token
+      x-proxy-name: aSyncTokenization
       summary: Queue a provision token request.
       description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
       parameters:
-        - {$ref: '#/components/parameters/TRIDParam'}
-        - {$ref: '#/components/parameters/ContentTypeHeader'}
-        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
-        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
-        - {$ref: '#/components/parameters/XCardBrandHeader'}
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+      example: { "Content-Type": "application/json", "Client-Request-Id": "00000000000", "Accept": "application/json","X-Card-Brand": "MC" }
       requestBody:
         required: true
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              QueueToken: {summary: Asynch Token Request, $ref: '#/components/examples/ProvisionTokenRequest'}
+              QueueToken: { summary: Asynch Token Request, $ref: '#/components/examples/ProvisionTokenRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -33,7 +34,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
               examples:
-                QueueToken: {summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationResponse'}
+                QueueToken: { summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -47,22 +48,23 @@ paths:
     post:
       tags: [ Synchronous Tokenization Endpoint Definition ]
       x-group-name: Tokens
-      x-proxy-name: Synch-Token
+      x-proxy-name: Tokenization
       summary: Token On the go request
       description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
       parameters:
-        - {$ref: '#/components/parameters/TRIDParam'}
-        - {$ref: '#/components/parameters/ContentTypeHeader'}
-        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
-        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
-        - {$ref: '#/components/parameters/XCardBrandHeader'}
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+      example: { "Content-Type": "application/json", "Client-Request-Id": "00000000000", "Accept": "application/json","X-Card-Brand": "MC" }
       requestBody:
         required: true
         content:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              ProvisionToken: {summary: Provision Token Request, $ref: '#/components/examples/ProvisionTokenRequest'}
+              ProvisionToken: { summary: Provision Token Request, $ref: '#/components/examples/ProvisionTokenRequest' }
       responses:
         201:
           description: Token created successfully
@@ -70,7 +72,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
               examples:
-                ProvisionToken: {summary: Provision Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse'}
+                ProvisionToken: { summary: Provision Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -87,19 +89,20 @@ paths:
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
       parameters:
-        - {$ref: '#/components/parameters/TRIDParam'}
-        - {$ref: '#/components/parameters/ContentTypeHeader'}
-        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
-        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
-        - {$ref: '#/components/parameters/XCardBrandHeader'}
-        - {$ref: '#/components/parameters/TokenReferenceId'}
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+      example: { "Content-Type": "application/json", "Client-Request-Id": "00000000000", "Accept": "application/json","X-Card-Brand": "MC" }
       requestBody:
         required: true
         content:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
             examples:
-              LifeCycle: {summary: Lifecycle Token Request, $ref: '#/components/examples/UpdateTokenRequest'}
+              LifeCycle: { summary: Lifecycle Token Request, $ref: '#/components/examples/UpdateTokenRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -124,19 +127,20 @@ paths:
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
       parameters:
-        - {$ref: '#/components/parameters/TRIDParam'}
-        - {$ref: '#/components/parameters/ContentTypeHeader'}
-        - {$ref: '#/components/parameters/AcceptLanguageHeader'}
-        - {$ref: '#/components/parameters/ClientRequestIdHeader'}
-        - {$ref: '#/components/parameters/XCardBrandHeader'}
-        - {$ref: '#/components/parameters/TokenReferenceId'}
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+      example: { "Content-Type": "application/json", "Client-Request-Id": "00000000000", "Accept": "application/json","X-Card-Brand": "MC" }
       requestBody:
         required: true
         content:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
             examples:
-              Cryptogram: {summary: CryptoGram Resquest, $ref: '#/components/examples/CryptoGramRequest'}
+              Cryptogram: { summary: CryptoGram Resquest, $ref: '#/components/examples/CryptoGramRequest' }
       responses:
         200:
           description: Token status updated successfully.
@@ -144,7 +148,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
               examples:
-                Cryptogram: {summary: CryptoGram Token Respsone, $ref: '#/components/examples/CryptogramResposne'}
+                Cryptogram: { summary: CryptoGram Token Respsone, $ref: '#/components/examples/CryptogramResposne' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -161,21 +165,21 @@ components:
     TRIDParam:
       x-model-version: 1.0
       name: id
-      schema: {type: string}
+      schema: { type: string }
       in: path
       required: true
       description: Token Requestor Id generated by Fiserv for a merchant. Unique value per merchant.
     TokenReferenceId:
       x-model-version: 1.0
       name: tokenReferenceId
-      schema: {type: string}
+      schema: { type: string }
       in: path
       required: true
       description: Token Reference Id generated by networks for a PAN at the time of tokenization.
     AuthorizationHeader:
       x-model-version: 1.0
       name: Authorization
-      schema: {type: string}
+      schema: { type: string }
       in: header
       required: true
       description: Authorization header used to ensure the request has not been tampered
@@ -184,7 +188,7 @@ components:
     AcceptLanguageHeader:
       x-model-version: 1.0
       name: Accept-Language
-      schema: {type: string}
+      schema: { type: string }
       in: header
       required: false
       description: The Accept Language header contains information about the language
@@ -195,7 +199,7 @@ components:
       name: Content-Type
       schema:
         type: string
-        enum: [application/json]
+        enum: [ application/json ]
         default: application/json
       in: header
       required: true
@@ -203,7 +207,7 @@ components:
     ClientRequestIdHeader:
       x-model-version: 1.0
       name: Client-Request-Id
-      schema: {type: string}
+      schema: { type: string }
       in: header
       required: true
       description: A client-generated ID for request tracking and signature creation,
@@ -212,7 +216,7 @@ components:
     TimestampHeader:
       x-model-version: 1.0
       name: Timestamp
-      schema: {type: integer, format: int64}
+      schema: { type: integer, format: int64 }
       in: header
       required: true
       description: Epoch timestamp in milliseconds in the request from a client system.
@@ -220,7 +224,7 @@ components:
     ApiKeyHeader:
       x-model-version: 1.0
       name: Api-Key
-      schema: {type: string}
+      schema: { type: string }
       in: header
       required: true
       description: API key provided to the merchant associating the requests with
@@ -228,7 +232,7 @@ components:
     XCardBrandHeader:
       x-model-version: 1.0
       name: X-Card-Brand
-      schema: {type: string}
+      schema: { type: string }
       in: header
       required: true
       description: API key provided to the merchant associating the requests with
@@ -243,7 +247,7 @@ components:
       description: The request cannot be validated.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -257,10 +261,10 @@ components:
                     message: "PAN number is mandatory."
                   }
                 },
-                hostExtraInfo: [{
+                hostExtraInfo: [ {
                   name: 10009,
                   value: "Invalid PAN"
-                }]
+                } ]
               }
 
     Unauthorized:
@@ -272,7 +276,7 @@ components:
       description: The requested resource does not exist.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -293,7 +297,7 @@ components:
       description: The request was timed out due to not receiving the request in time.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -314,7 +318,7 @@ components:
       description: The media type is not supported.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -328,7 +332,7 @@ components:
       description: Too many request were sent.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -345,7 +349,7 @@ components:
       description: An unexpected internal server error occurred.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -362,7 +366,7 @@ components:
       description: The service was unavailable.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -379,7 +383,7 @@ components:
       description: The request timed out while waiting for a response.
       content:
         application/json:
-          schema: {$ref: '#/components/schemas/Error'}
+          schema: { $ref: '#/components/schemas/Error' }
           example:
             error:
               - {
@@ -401,9 +405,9 @@ components:
       description: Error information.
       type: object
       properties:
-        code: { type: string, description: Uniquely identifies an error condition. Client applications need to read and handle errors based on this., example: 400001}
-        message: { type: string, description: A generic description of the error condition., example: Missing type ID property.}
-        category: {type: string,  description: The resource associated with the error condition., example: Tokenization Error}
+        code: { type: string, description: Uniquely identifies an error condition. Client applications need to read and handle errors based on this., example: 400001 }
+        message: { type: string, description: A generic description of the error condition., example: Missing type ID property. }
+        category: { type: string,  description: The resource associated with the error condition., example: Tokenization Error }
         developerInfo:
           $ref: '#/components/schemas/DeveloperInfo'
         hostExtraInfo:
@@ -418,8 +422,8 @@ components:
       type: object
       description: Information that needs to be understood by the client developers and should not be interpreted for application processing.
       properties:
-        developerMessage: { type: string, description: An elaborative description of the error description., example: Invalid Message format in request payload.}
-        moreInfo: { type: string, description: Link to the error in Developer page., example: "https://www.example.com/errors/40000"}
+        developerMessage: { type: string, description: An elaborative description of the error description., example: Invalid Message format in request payload. }
+        moreInfo: { type: string, description: Link to the error in Developer page., example: "https://www.example.com/errors/40000" }
         fieldError:
           description: Detailed information about message format errors.
           type: array
@@ -432,21 +436,21 @@ components:
       type: array
       items:
         properties:
-          field: { type: string, description: The property or attribute associated with the error, example: example id}
-          message: {type: string, description: Information specific to a property or attribute.,
-                    example: exampleId is mandatory}
+          field: { type: string, description: The property or attribute associated with the error, example: example id }
+          message: { type: string, description: Information specific to a property or attribute.,
+                     example: exampleId is mandatory }
 
     NVP:
       x-model-version: 1.0
       description: Name and Value pair.
       type: object
       properties:
-        name: { type: string, description: name of the attribute}
-        value: { type: string, description: value of the attribute}
+        name: { type: string, description: name of the attribute }
+        value: { type: string, description: value of the attribute }
         valueAsList:
           type: array
           minItems: 0
-          items: { type: string, description: list of items}
+          items: { type: string, description: list of items }
 
     ProvisionTokenResponse:
       x-model-version: 1.0
@@ -483,15 +487,15 @@ components:
         - cardBrand
         - createdDate
       properties:
-        clientRequestId: { description: Request Id provided at the time of API call in the header Client-Request-Id., type: string, example: "2021-09-28T09:07:44.716+00:00"}
+        clientRequestId: { description: Request Id provided at the time of API call in the header Client-Request-Id., type: string, example: "2021-09-28T09:07:44.716+00:00" }
         provisionRequestId: { description: Corellation Id generated by the platform after adding request to the queue.,
                               type: string,
-                              example: "2021-09-28T09:07:44.716+00:00"}
+                              example: "2021-09-28T09:07:44.716+00:00" }
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
         createdDate: { description: Time in when the request was added into the queue.,
                        type: string,
-                       example: "2021-09-28T09:07:44.716+00:00"}
+                       example: "2021-09-28T09:07:44.716+00:00" }
 
     Provision:
       x-model-version: 1.0

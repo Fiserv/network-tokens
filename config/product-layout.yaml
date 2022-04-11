@@ -37,43 +37,43 @@ header:
 featuredFeatures:
   - title: Network Tokens
     description:  Network Tokens Services
-    tags: ["Asynch-Tokenization", "Synch-Tokenization", "Token-Lifecycle"]
-    bullets: ["Asynch-Tokenization", "Synch-Tokenization" ]
+    tags: ["aSynch-Tokenization", "Tokenization", "Lifecycle", "Cryptogram"]
+    bullets: ["aSynch-Tokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
       - relatedDoc: 
-        title: Asynch-Tokenization
+        title: aSynchTokenization
         description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
         link: ./docs/asynchTokenization.md
       - relatedDoc: 
-        title: Synch-Tokenization
+        title: Tokenization
         description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
         link: ./docs/synchTokenization.md
       - relatedDoc: 
-        title: Token-Lifecycle
+        title: Lifecycle
         description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
         link: ./docs/merchantlcm.md
       - relatedDoc:
-        title: Token-Cryptogram
+        title: Cryptogram
         description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
         link: ./docs/cryptogram.md
     relatedAPIs:
       - relatedAPI: 
-        title: Asynch-Tokenization
+        title: aSynchTokenization
         description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
         type: "post"
         path: "/mtrg/v1/trids/{id}/queue-tokens"
       - relatedAPI: 
-        title: Synch-Tokenization
+        title: Tokenization
         description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
         type: "post"        
         path: "/mtrg/v1/trids/{id}/network-tokens"
       - relatedAPI: 
-        title: Token-Lifecycle
+        title: Lifecycle
         description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
         type: "patch"
         path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}"
       - relatedAPI:
-        title: Token-Cryptogram
+        title: Cryptogram
         description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
         type: "poat"
         path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}/cryptogram"
