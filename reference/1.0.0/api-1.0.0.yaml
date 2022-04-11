@@ -881,6 +881,7 @@ components:
               pushAccountReceipt: 6001a9f027e5629d11e3949a0800a
               provisionTokenId: 6001a9f027e5629d11e3949a0800a
           transactionType: ECOM
+          cryptogramRequired: false
         cardBrand: VI
 
     CryptogramResposne:
