@@ -602,7 +602,6 @@ components:
       type: object
       required:
         - cryptogram
-        - eci
       properties:
         cryptogram:
           description: The unique cryptogram valid only for a specific transaction.
@@ -899,6 +898,7 @@ components:
           track2Equivalent: 5204736200176909D25041000000000000000F
         crypto:
           cryptogram: ABpQmfNkuzAqAAKxV1JzAAADFA==
+          eci: 123
 
     CryptoGramRequest:
       value:
