@@ -139,7 +139,7 @@ paths:
               Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
       responses:
         200:
-          description: Token status updated successfully.
+          description: Generated cryptogram for a token successfully.
           content:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
