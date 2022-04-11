@@ -25,7 +25,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              Default: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -62,7 +62,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              ProvisionToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              Default: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token created successfully
@@ -99,7 +99,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
             examples:
-              LifeCycle: { $ref: '#/components/examples/UpdateTokenMockRequest' }
+              Default: { $ref: '#/components/examples/UpdateTokenMockRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -136,7 +136,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
             examples:
-              Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
+              Default: { $ref: '#/components/examples/CryptoGramMockRequest' }
       responses:
         200:
           description: Token status updated successfully.
