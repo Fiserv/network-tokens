@@ -97,15 +97,15 @@ components:
       example: "application/json"
       description: The content type. Valid value (application/json).
     ClientRequestIdHeader:
-      x-model-version: 1.0
       name: Client-Request-Id
-      schema: { type: string }
       in: header
-      required: true
       description: A client-generated ID for request tracking and signature creation,
         unique per request. This is also used for idempotency control. Recommended
         128-bit UUID format.
-      example: "120011"
+      required: true
+      schema:
+        type: string
+        example: "120011"
     TimestampHeader:
       x-model-version: 1.0
       name: Timestamp
