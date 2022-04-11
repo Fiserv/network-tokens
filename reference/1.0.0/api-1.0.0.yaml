@@ -28,6 +28,36 @@ paths:
               QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
+openapi: 3.0.3
+info: { title: API Explorer, description: This Specification document lists the APIs required for provision a token for a PAN getting Cryptogram for a token and Lifecycle management for the provisioned token., version: 1.0.0 }
+servers:
+  - { url: 'https://api.fiservapps.com', description: Production }
+  - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
+  - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
+paths:
+  /mtrg/v1/trids/{id}/queue-tokens:
+    x-model-version: 1.0
+    post:
+      tags: [ Asynchronous Tokenization Endpoint Definition ]
+      x-group-name: Tokenization
+      x-proxy-name: aSyncTokenization
+      summary: Queue a provision token request.
+      description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            examples:
+              QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+      responses:
+        201:
           description: Token request saved successfully.
           content:
             application/json:
@@ -42,6 +72,116 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
+  /mtrg/v1/trids/{id}/network-tokens:
+    x-model-version: 1.0
+    post:
+      tags: [ Synchronous Tokenization Endpoint Definition ]
+      x-group-name: Tokenization
+      x-proxy-name: Tokenization
+      summary: Token On the go request
+      description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            examples:
+              ProvisionToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+      responses:
+        201:
+          description: Token created successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
+              examples:
+                ProvisionToken: { $ref: '#/components/examples/TokenizationMockResponse' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        429: { $ref: '#/components/responses/TooManyRequest' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}:
+    patch:
+      tags: [ Token Lifecycle Endpoint Definition ]
+      x-group-name: Tokenization
+      x-proxy-name: Lifecycle
+      summary: Merchant initiated lifecycle
+      description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
+            examples:
+              LifeCycle: { $ref: '#/components/examples/UpdateTokenMockRequest' }
+      responses:
+        204:
+          description: Token status updated successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NoContent' }
+              examples:
+                LifeCycle: { $ref: '#/components/examples/NoContent' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        429: { $ref: '#/components/responses/TooManyRequest' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}/cryptogram:
+    post:
+      tags: [ Token Cryptogram Endpoint Definition ]
+      x-group-name: Tokenization
+      x-proxy-name: Cryptogram
+      summary: Cryptogram request for CIT transactions
+      description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CryptoGramRequest' }
+            examples:
+              Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
+      responses:
+        200:
+          description: Generated cryptogram for a token successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CryptoGramResponse' }
+              examples:
+                Cryptogram: { $ref: '#/components/examples/CryptogramMockResposne' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        429: { $ref: '#/components/responses/TooManyRequest' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
   
 
 ##-------------------------------------
