@@ -36,9 +36,9 @@ header:
     altText: REPLACEME™
 featuredFeatures:
   - title: Network Tokens
-    description:  Network Tokens Services
-    tags: ["aSynch-Tokenization", "Tokenization", "Lifecycle", "Cryptogram"]
-    bullets: ["aSynch-Tokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
+    description:  Network Tokens Services for COF tokenization.
+    tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
+    bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
       - relatedDoc: 
         title: aSynchTokenization
@@ -56,24 +56,3 @@ featuredFeatures:
         title: Cryptogram
         description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
         link: ./docs/cryptogram.md
-    relatedAPIs:
-      - relatedAPI: 
-        title: aSynchTokenization
-        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
-        type: "post"
-        path: "/mtrg/v1/trids/{id}/queue-tokens"
-      - relatedAPI: 
-        title: Tokenization
-        description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
-        type: "post"        
-        path: "/mtrg/v1/trids/{id}/network-tokens"
-      - relatedAPI: 
-        title: Lifecycle
-        description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
-        type: "patch"
-        path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}"
-      - relatedAPI:
-        title: Cryptogram
-        description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
-        type: "poat"
-        path: "/mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}/cryptogram"
