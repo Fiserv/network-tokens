@@ -25,7 +25,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              QueueToken: { summary: Asynch Token Request, $ref: '#/components/examples/ProvisionTokenRequest' }
+              QueueToken: { summary: Asynch Token Request, $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -33,7 +33,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
               examples:
-                QueueToken: { summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationResponse' }
+                QueueToken: { summary: Asynch Token Respsone, $ref: '#/components/examples/AsyncTokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -62,7 +62,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              ProvisionToken: { summary: Provision Token Request, $ref: '#/components/examples/ProvisionTokenRequest' }
+              ProvisionToken: { summary: Provision Token Request, $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token created successfully
@@ -70,7 +70,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
               examples:
-                ProvisionToken: { summary: Provision Token Respsone, $ref: '#/components/examples/SyncTokenizationResponse' }
+                ProvisionToken: { summary: Provision Token Respsone, $ref: '#/components/examples/TokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -99,7 +99,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/UpdateTokenRequest' }
             examples:
-              LifeCycle: { summary: Lifecycle Token Request, $ref: '#/components/examples/UpdateTokenRequest' }
+              LifeCycle: { summary: Lifecycle Token Request, $ref: '#/components/examples/UpdateTokenMockRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -136,7 +136,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/CryptoGramRequest' }
             examples:
-              Cryptogram: { summary: CryptoGram Resquest, $ref: '#/components/examples/CryptoGramRequest' }
+              Cryptogram: { summary: CryptoGram Resquest, $ref: '#/components/examples/CryptoGramMockRequest' }
       responses:
         200:
           description: Token status updated successfully.
@@ -144,7 +144,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
               examples:
-                Cryptogram: { summary: CryptoGram Token Respsone, $ref: '#/components/examples/CryptogramResposne' }
+                Cryptogram: { summary: CryptoGram Token Respsone, $ref: '#/components/examples/CryptogramMockResposne' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -861,14 +861,7 @@ components:
         - BATCH
 
   examples:
-    AsyncTokenizationResponse:
-      value:
-        clientRequestId: '2021-09-28T09:07:44.716+00:00'
-        provisionRequestId: '2021-09-28T09:07:44.716+00:00'
-        cardBrand: VI
-        createdDate: '2021-09-28T09:07:44.716+00:00'
-
-    SyncTokenizationResponse:
+    TokenizationMockResponse:
       value:
         provision:
           card:
@@ -896,7 +889,14 @@ components:
           cryptogramRequired: false
         cardBrand: VI
 
-    CryptogramResposne:
+    AsyncTokenizationMockResponse:
+      value:
+        clientRequestId: '2021-09-28T09:07:44.716+00:00'
+        provisionRequestId: '2021-09-28T09:07:44.716+00:00'
+        cardBrand: VI
+        createdDate: '2021-09-28T09:07:44.716+00:00'
+
+    CryptogramMockResposne:
       value:
         token:
           fiservTokenRequestorId: AAA008UU
@@ -912,12 +912,12 @@ components:
           cryptogram: ABpQmfNkuzAqAAKxV1JzAAADFA==
           eci: '123'
 
-    CryptoGramRequest:
+    CryptoGramMockRequest:
       value:
         transactionType: ECOM
         cardBrand: MC
 
-    ProvisionTokenRequest:
+    ProvisionTokenMockRequest:
       value:
         provision:
           card:
@@ -930,7 +930,7 @@ components:
           cryptogramRequired: false
         cardBrand: MC
 
-    UpdateTokenRequest:
+    UpdateTokenMockRequest:
       value:
         operation: RESUME
         updateReason:
@@ -941,3 +941,4 @@ components:
 
     NoContent:
       value:
+
