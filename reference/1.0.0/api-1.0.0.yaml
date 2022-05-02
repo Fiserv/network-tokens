@@ -10,7 +10,7 @@ paths:
     post:
       tags: [ Asynchronous Tokenization Endpoint Definition ]
       x-group-name: Tokenization
-      x-proxy-name: aSyncTokenization
+      x-proxy-name: CreateASynchToken
       summary: Queue a provision token request.
       description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
       parameters:
@@ -47,7 +47,7 @@ paths:
     post:
       tags: [ Synchronous Tokenization Endpoint Definition ]
       x-group-name: Tokenization
-      x-proxy-name: Tokenization
+      x-proxy-name: CreateToken
       summary: Token On the go request
       description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
       parameters:
@@ -83,7 +83,7 @@ paths:
     patch:
       tags: [ Token Lifecycle Endpoint Definition ]
       x-group-name: Tokenization
-      x-proxy-name: Lifecycle
+      x-proxy-name: Token Lifecycle
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
       parameters:
@@ -120,7 +120,7 @@ paths:
     post:
       tags: [ Token Cryptogram Endpoint Definition ]
       x-group-name: Tokenization
-      x-proxy-name: Cryptogram
+      x-proxy-name: Get Cryptogram
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
       parameters:
