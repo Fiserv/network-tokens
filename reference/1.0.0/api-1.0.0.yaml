@@ -5,14 +5,14 @@ servers:
   - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
   - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
-  /mtrg/v1/trids/{id}/queue-tokens:
+  /v1/trids/{id}/async-tokens:
     x-model-version: 1.0
     post:
-      tags: [ Asynchronous Tokenization Endpoint Definition ]
+      tags: [ Asynchronous Tokenization API ]
       x-group-name: Tokenization
-      x-proxy-name: CreateASynchToken
+      x-proxy-name: CreateAsynchToken
       summary: Queue a provision token request.
-      description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+      description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
         - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
@@ -42,50 +42,13 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /mtrg/v1/trids/{id}/network-tokens:
-    x-model-version: 1.0
-    post:
-      tags: [ Synchronous Tokenization Endpoint Definition ]
-      x-group-name: Tokenization
-      x-proxy-name: CreateToken
-      summary: Token On the go request
-      description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
-      parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
-        - { $ref: '#/components/parameters/ContentTypeHeader' }
-        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
-        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
-        - { $ref: '#/components/parameters/XCardBrandHeader' }
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
-            examples:
-              ProvisionToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
-      responses:
-        201:
-          description: Token created successfully
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
-              examples:
-                ProvisionToken: { $ref: '#/components/examples/TokenizationMockResponse' }
-        400: { $ref: '#/components/responses/BadRequest' }
-        401: { $ref: '#/components/responses/Unauthorized' }
-        404: { $ref: '#/components/responses/NotFound' }
-        429: { $ref: '#/components/responses/TooManyRequest' }
-        500: { $ref: '#/components/responses/ServerError' }
-        503: { $ref: '#/components/responses/ServiceUnavailable' }
-        504: { $ref: '#/components/responses/GatewayTimeout' }
-
-  /mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}:
+  /v1/trids/{id}/tokens/{tokenReferenceId}:
     patch:
-      tags: [ Token Lifecycle Endpoint Definition ]
+      tags: [ Token Lifecycle API ]
       x-group-name: Tokenization
       x-proxy-name: Token Lifecycle
       summary: Merchant initiated lifecycle
-      description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
+      description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status by the Merchant.
       parameters:
         - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
@@ -111,14 +74,73 @@ paths:
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
-        429: { $ref: '#/components/responses/TooManyRequest' }
         500: { $ref: '#/components/responses/ServerError' }
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /mtrg/v1/trids/{id}/network-tokens/{tokenReferenceId}/cryptogram:
-    post:
-      tags: [ Token Cryptogram Endpoint Definition ]
+    get:
+      tags: [ Get Token API ]
+      x-group-name: Tokenization
+      x-proxy-name: Get Token
+      summary: Retrieve information about a token.
+      description: Retrieve information about a token using token reference Id
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+
+      responses:
+        200:
+          description: Token detail retrived successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
+              examples:
+                ProvisionToken: { $ref: '#/components/examples/TokenizationMockResponse' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /v1/trids/{id}/tokens/{tokenReferenceId}/assets/{assetId}:
+    get:
+      tags: [ Get Asset API ]
+      x-group-name: Tokenization
+      x-proxy-name: Get Asset
+      summary: Retrieve details about token asset, card band logo.
+      description: Retrieve details about token asset, card band logo. Use the asset Id provided in tokenization webhook.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+        - { $ref: '#/components/parameters/AssetId' }
+
+      responses:
+        200:
+          description: Card art retrived successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GetAssetResponse' }
+              examples:
+                ProvisionToken: { $ref: '#/components/examples/GetAssetMockResponse' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
+  /v1/trids/{id}/tokens/{tokenReferenceId}/cryptogram:
+    get:
+      tags: [ Get Cryptogram API ]
       x-group-name: Tokenization
       x-proxy-name: Get Cryptogram
       summary: Cryptogram request for CIT transactions
@@ -130,13 +152,7 @@ paths:
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
         - { $ref: '#/components/parameters/XCardBrandHeader' }
         - { $ref: '#/components/parameters/TokenReferenceId' }
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/CryptoGramRequest' }
-            examples:
-              Cryptogram: { $ref: '#/components/examples/CryptoGramMockRequest' }
+
       responses:
         200:
           description: Generated cryptogram for a token successfully.
@@ -148,11 +164,41 @@ paths:
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
-        429: { $ref: '#/components/responses/TooManyRequest' }
         500: { $ref: '#/components/responses/ServerError' }
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
-  
+
+
+  /v1/tokens/{tokenReferenceId}/notifications:
+    x-model-version: 1.0
+    post:
+      tags: [ Merchant Notification API ]
+      x-group-name: Notifications
+      x-proxy-name: Create Notification
+      summary: Send webhook notification to merchant.
+      description: Send webhook notification to merchant once the token is provison by networks.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/TokenReferenceId' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NotificationRequest' }
+            examples:
+              QueueToken: { $ref: '#/components/examples/NotificationMockRequest' }
+      responses:
+        200:
+          description: Token request saved successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NoContent' }
+              examples:
+                QueueToken: { $ref: '#/components/examples/NoContent' }
 
 ##-------------------------------------
 ## Common Model
@@ -174,6 +220,14 @@ components:
       in: path
       required: true
       description: Token Reference Id generated by networks for a PAN at the time of tokenization.
+      example: "12345"
+    AssetId:
+      x-model-version: 1.0
+      name: assetId
+      schema: { type: string }
+      in: path
+      required: true
+      description: Asset Id provided as part of webhook to merchant.
       example: "12345"
     AuthorizationHeader:
       x-model-version: 1.0
@@ -465,8 +519,6 @@ components:
       properties:
         provision:
           $ref: '#/components/schemas/Provision'
-        cardBrand:
-          $ref: '#/components/schemas/CardBrand'
 
     ProvisionTokenResponse:
       x-model-version: 1.0
@@ -477,8 +529,6 @@ components:
       properties:
         provision:
           $ref: '#/components/schemas/Provision'
-        crypto:
-          $ref: '#/components/schemas/CryptoGram'
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
 
@@ -492,15 +542,10 @@ components:
         - createdDate
       properties:
         clientRequestId: { description: Request Id provided at the time of API call in the header Client-Request-Id., type: string, example: "2021-09-28T09:07:44.716+00:00" }
-        provisionRequestId: { description: Corellation Id generated by the platform after adding request to the queue.,
-                              type: string,
-                              example: "2021-09-28T09:07:44.716+00:00" }
+        provisionRequestId: { description: Corellation Id generated by the platform after adding request to the queue.,type: string, example: "2021-09-28T09:07:44.716+00:00" }
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
-        createdDate: { description: Time in when the request was added into the queue.,
-                       type: string,
-                       example: "2021-09-28T09:07:44.716+00:00" }
-
+        createdDate: { description: Time in when the request was added into the queue., type: string,example: "2021-09-28T09:07:44.716+00:00" }
 
     UpdateTokenRequest:
       x-model-version: 1.0
@@ -514,8 +559,6 @@ components:
           $ref: '#/components/schemas/Operation'
         updateReason:
           $ref: '#/components/schemas/UpdateReason'
-        cardBrand:
-          $ref: '#/components/schemas/CardBrand'
 
     UpdateReason:
       x-model-version: 1.0
@@ -535,22 +578,6 @@ components:
           example: "Lost/stolen device"
           writeOnly: true
 
-    CryptoGramRequest:
-      x-model-version: 1.0
-      description: Create CryptoGram request object model.
-      type: object
-      required:
-        - transactionType
-      properties:
-        transactionType:
-          $ref: '#/components/schemas/TransactionType'
-        cardBrand:
-          $ref: '#/components/schemas/CardBrand'
-        merchantInfo:
-          $ref: '#/components/schemas/MerchantInfo'
-        customerInfo:
-          $ref: '#/components/schemas/CustomerInfo'
-
     CryptoGramResponse:
       x-model-version: 1.0
       description: Create CryptoGram resposne object model.
@@ -564,6 +591,28 @@ components:
         crypto:
           $ref: '#/components/schemas/CryptoGram'
 
+    GetAssetResponse:
+      x-model-version: 1.0
+      description: Get Asset respsone object model
+      type: object
+      required:
+        - mediaContents
+      properties:
+        mediaContents:
+          $ref: '#/components/schemas/MediaContents'
+
+    NotificationRequest:
+      x-model-version: 1.0
+      title: Push notification request.
+      type: object
+      required:
+        - notification
+        - cardBrand
+      properties:
+        notification:
+          $ref: '#/components/schemas/Notification'
+        cardBrand:
+          $ref: '#/components/schemas/CardBrand'
     Provision:
       x-model-version: 1.0
       description: Provision card information.
@@ -573,70 +622,51 @@ components:
       properties:
         card:
           $ref: '#/components/schemas/Card'
-        panSource:
-          $ref: '#/components/schemas/PanSource'
         tokenInfo:
           $ref: '#/components/schemas/TokenInfo'
-        transactionType:
-          $ref: '#/components/schemas/TransactionType'
-        cryptogramRequired:
-          $ref: '#/components/schemas/CryptoGramRequired'
-        merchantInfo:
-          $ref: '#/components/schemas/MerchantInfo'
-        customerInfo:
-          $ref: '#/components/schemas/CustomerInfo'
-        authorizationInfo:
-          $ref: '#/components/schemas/AuthorizationInfo'
 
-    CryptoGramRequired:
-      description: Unique ID mapes to tokenRequestorId. Unique per merchant.
-      type: boolean
-      example: false
-
-    MerchantInfo:
+    Notification:
       x-model-version: 1.0
-      description: Information about merchant - Required only for Rupay.
+      description: Notification request structure
       type: object
       required:
-        - merchantId
-        - merchantName
+        - token
+        - card
       properties:
-        merchantId:
-          description: Unique Id provided by frontend(north/south/memphis/oma) for a merchant at the time of boarding .
-          type: string
-          example: "54234509"
-          maximum: 36
-        merchantName:
-          description: Name provided by the merchant at the time of boarding - Doing Business As.
-          type: string
-          example: "Microsoft LLC."
-          maximum: 45
+        card:
+          $ref: '#/components/schemas/Card'
+        token:
+          $ref: '#/components/schemas/TokenInfo'
 
-    CustomerInfo:
+    MediaContents:
       x-model-version: 1.0
-      description: Information about customer - Required Only for Rupay.
+      description: Provision card information.
       type: object
       required:
-        - consumerId
+        - mimeType
+        - data
+        - height
+        - width
       properties:
-        consumerId:
-          description: Unique profile Id associated with each customer.
+        mimeType:
+          description: Specified as a MIME type, which will be one of the following supported types applicatoin/pdf (for images must be a vector PDF image) image/png (includes alpha channel) text/plain text/html
           type: string
-          example: "2d8a1360a24841e1a5677"
-          maximum: 64
-
-    AuthorizationInfo:
-      x-model-version: 1.0
-      description: Information about Auth transaction - Required Only for Rupay.
-      type: object
-      required:
-        - authRefNo
-      properties:
-        authRefNo:
-          description: Unique Auth Id for the transaction created before tokenization.
+          example: "text/plain"
+        data:
+          description: The data for this item of media. Base64-encoded data, given in the format as specified in 'type'.
           type: string
-          example: "2d8a1360a24841e1a5677"
-          maximum: 36
+          example: "encrypted_data bianry"
+          readOnly: true
+        height:
+          description: For image assets, the height of this image. Specified in pixels.
+          type: string
+          example: "1024"
+          readOnly: true
+        width:
+          description: For image assets, the width of this image. Specified in pixels.
+          type: string
+          example: "750"
+          readOnly: true
 
     Card:
       x-model-version: 1.0
@@ -762,16 +792,12 @@ components:
           type: string
           writeOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
-        pushAccountReceipt:
-          description: This attribute is used only in case of push provisioning used case. The value of the attribute should be provided in case of PAN details.
-          type: string
-          writeOnly: true
-          example: "6001a9f027e5629d11e3949a0800a"
         provisionTokenId:
           description: This will be returned only for VISA tokenization.
           type: string
           writeOnly: true
           example: "6001a9f027e5629d11e3949a0800a"
+
 
     NoContent:
       x-model-version: 1.0
@@ -838,28 +864,6 @@ components:
         - CUSTOMER_CONFIRMED
         - OTHER
 
-    TransactionType:
-      x-model-version: 1.0
-      description: ECOM-e-commercetransactiontype.Tobe used with web flows.RECURRING-Recurringpayment. If not provided in request, default value will be ECOM
-      type: string
-      example: ECOM
-      enum:
-        - ECOM
-        - RECURRING
-
-    PanSource:
-      x-model-version: 1.0
-      description: Source of the payment instrument (PAN). This enum value specifies the source and the method used to provide the payment instrument data. If not provided in request, default value will be CARD_ON_FILE
-      type: string
-      example: CARD_ON_FILE
-      enum:
-        - CARD_ON_FILE
-        - CARD_ADDED_MANUALLY
-        - ISSUER_PUSH_PROVISION
-        - TOKEN_FOR_TOKEN
-        - CARD_ADDED_VIA_APPLICATION
-        - BATCH
-
   examples:
     TokenizationMockResponse:
       value:
@@ -883,10 +887,7 @@ components:
               tokenRequestorId: '2901'
               fiservTokenRequestorId: MSTF-2901
               paymentToken: 5001a9f027e5629d11e3949a0800a
-              pushAccountReceipt: 6001a9f027e5629d11e3949a0800a
               provisionTokenId: 6001a9f027e5629d11e3949a0800a
-          transactionType: ECOM
-          cryptogramRequired: false
         cardBrand: VI
 
     AsyncTokenizationMockResponse:
@@ -912,11 +913,6 @@ components:
           cryptogram: ABpQmfNkuzAqAAKxV1JzAAADFA==
           eci: '123'
 
-    CryptoGramMockRequest:
-      value:
-        transactionType: ECOM
-        cardBrand: MC
-
     ProvisionTokenMockRequest:
       value:
         provision:
@@ -925,10 +921,6 @@ components:
             expiryDate:
               month: '12'
               year: '22'
-          panSource: CARD_ON_FILE
-          transactionType: ECOM
-          cryptogramRequired: false
-        cardBrand: MC
 
     UpdateTokenMockRequest:
       value:
@@ -937,7 +929,38 @@ components:
           causedBy: CARDHOLDER
           reasonCode: OTHER
           reason: Lost/stolen device
-        cardBrand: MC
+
+    GetAssetMockResponse:
+      value:
+        mimeType: text/plain
+        data: encrypted_data bianry
+        height: '1024'
+        width: '750'
+
+    NotificationMockRequest:
+      value:
+        notification:
+          card:
+            alias: '4567'
+            cardBrandLogoAssetId: SOME_RANDOM_ID
+            cardBrandDescription: SHORT_DESCRIPTION
+            expiryDate:
+              month: '09'
+              year: '20'
+          tokenInfo:
+            decision: ACTIVE
+            token:
+              tokenReferenceId: 5001a9f027e5629d11e3949a0800a
+              expiryDate:
+                month: '09'
+                year: '20'
+              alias: '1111'
+              paymentAccountReferenceId: 5001a9f027e5629d11e3949a0800a
+              tokenRequestorId: '2901'
+              fiservTokenRequestorId: MSTF-2901
+              paymentToken: 5001a9f027e5629d11e3949a0800a
+              provisionTokenId: 6001a9f027e5629d11e3949a0800a
+        cardBrand: VI
 
     NoContent:
       value:
