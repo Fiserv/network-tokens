@@ -68,7 +68,6 @@ paths:
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
-        429: { $ref: '#/components/responses/TooManyRequest' }
         500: { $ref: '#/components/responses/ServerError' }
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
