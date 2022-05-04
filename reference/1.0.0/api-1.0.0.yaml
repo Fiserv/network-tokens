@@ -11,7 +11,7 @@ paths:
       tags: [ Asynchronous Tokenization API ]
       x-group-name: Tokenization
       x-proxy-name: CreateAsynchToken
-      summary: aSynchronous a provision token request.
+      summary: aSynchronous provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
         - { $ref: '#/components/parameters/TRIDParam' }
@@ -45,10 +45,10 @@ paths:
   /v1/trids/{id}/async-tokens/{id}/status:
     x-model-version: 1.0
     get:
-      tags: [ Asynchronous Tokenization API ]
+      tags: [ Asynchronous Tokenization Status API ]
       x-group-name: Tokenization
-      x-proxy-name: CreateAsynchToken
-      summary: aSynchronous a provision token request.
+      x-proxy-name: GetTokenStatus
+      summary: aSynchronous provision token status request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
         - { $ref: '#/components/parameters/TRIDParam' }
