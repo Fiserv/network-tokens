@@ -680,8 +680,8 @@ components:
       description: Notification request structure
       type: object
       required:
-        - token
         - card
+        - TokenInfo
       properties:
         card:
           $ref: '#/components/schemas/Card'
