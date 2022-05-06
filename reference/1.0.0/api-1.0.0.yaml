@@ -5,7 +5,7 @@ servers:
   - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
   - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
-  /v1/trids/{id}/async-tokens:
+  /v1/async-tokens:
     x-model-version: 1.0
     post:
       tags: [ Asynchronous Tokenization API ]
@@ -14,7 +14,6 @@ paths:
       summary: aSynchronous a provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -42,7 +41,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/trids/{id}/async-tokens/{id}/status:
+  /v1/async-tokens/{provisionRequestId}/status:
     x-model-version: 1.0
     get:
       tags: [ Token Status API ]
@@ -51,7 +50,6 @@ paths:
       summary: Get Status of a aSych provision request.
       description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -72,15 +70,14 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/trids/{id}/tokens/{tokenReferenceId}:
+  /v1/tokens/{tokenReferenceId}:
     patch:
-      tags: [ Token Lifecycle API ]
+      tags: [ Merchant Initiated Token Lifecycle API ]
       x-group-name: Tokenization
-      x-proxy-name: UpdateTokenStatus
+      x-proxy-name: UpdateTokenState
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status by the Merchant.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -115,7 +112,6 @@ paths:
       summary: Retrieve information about a token.
       description: Retrieve information about a token using token reference Id
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -137,7 +133,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/trids/{id}/tokens/{tokenReferenceId}/assets/{assetId}:
+  /v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
     get:
       tags: [ Get Asset API ]
       x-group-name: Tokenization
@@ -145,13 +141,12 @@ paths:
       summary: Retrieve details about token asset, card band logo.
       description: Retrieve details about token asset, card band logo. Use the asset Id provided in tokenization webhook.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
         - { $ref: '#/components/parameters/XCardBrandHeader' }
         - { $ref: '#/components/parameters/TokenReferenceId' }
-        - { $ref: '#/components/parameters/AssetId' }
+        - { $ref: '#/components/parameters/CardBrandLogoAssetId' }
 
       responses:
         200:
@@ -168,7 +163,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/trids/{id}/tokens/{tokenReferenceId}/cryptogram:
+  /v1/tokens/{tokenReferenceId}/cryptogram:
     get:
       tags: [ Get Cryptogram API ]
       x-group-name: Tokenization
@@ -176,7 +171,6 @@ paths:
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -199,16 +193,46 @@ paths:
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
 
-  /v1/tokens/{tokenReferenceId}/notifications:
+  /v1/async-tokens/{provisionRequestId}/notifications:
     x-model-version: 1.0
     post:
       tags: [ Merchant Notification API ]
       x-group-name: Notifications
       x-proxy-name: CreateNotification
-      summary: Send webhook notification to merchant.
+      summary: Send webhook notification to merchant with token details.
       description: Send webhook notification to merchant once the token is provison by networks.
       parameters:
-        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/ProvisionRequestId' }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NotificationRequest' }
+            examples:
+              Notification: { $ref: '#/components/examples/NotificationMockRequest' }
+      responses:
+        200:
+          description: Token status updated successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NoContent' }
+              examples:
+                LifeCycle: { $ref: '#/components/examples/NoContent' }
+
+
+  /v1/tokens/{tokenReferenceId}/notifications:
+    x-model-version: 1.0
+    post:
+      tags: [ Merchant Notification API]
+      x-group-name: Notifications
+      x-proxy-name: CreateLifeCycleNotification
+      summary: Send webhook notification to merchant with Lifecycle updates.
+      description: Send webhook notification to merchant if there is any chnage in the token State.
+      parameters:
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
@@ -229,7 +253,6 @@ paths:
               schema: { $ref: '#/components/schemas/NoContent' }
               examples:
                 LifeCycle: { $ref: '#/components/examples/NoContent' }
-
 ##-------------------------------------
 ## Common Model
 ##-------------------------------------
@@ -253,15 +276,15 @@ components:
       example: "12345"
     ProvisionRequestId:
       x-model-version: 1.0
-      name: id
+      name: provisionRequestId
       schema: { type: string }
       in: path
       required: true
       description: Random UUID provided in response to asynch token API call - provisionRequestId.
       example: "12345-oooopp-jjjdooo"
-    AssetId:
+    CardBrandLogoAssetId:
       x-model-version: 1.0
-      name: assetId
+      name: cardBrandLogoAssetId
       schema: { type: string }
       in: path
       required: true
@@ -939,10 +962,10 @@ components:
 
     AsyncTokenizationMockResponse:
       value:
-        clientRequestId: '2021-09-28T09:07:44.716+00:00'
-        provisionRequestId: '2021-09-28T09:07:44.716+00:00'
+        clientRequestId: '5001a9f027e5629d11e3949a0800a'
+        provisionRequestId: '5001a9f027e5629d11e3949a0800a'
         cardBrand: VI
-        createdDate: '2021-09-28T09:07:44.716+00:00'
+        createdDate: '5001a9f027e5629d11e3949a0800a'
 
     CryptogramMockResposne:
       value:
