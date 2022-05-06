@@ -11,7 +11,7 @@ paths:
       tags: [ Asynchronous Tokenization API ]
       x-group-name: Tokenization
       x-proxy-name: CreateAsynchToken
-      summary: Queue a provision token request.
+      summary: aSynchronous a provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
         - { $ref: '#/components/parameters/TRIDParam' }
@@ -25,7 +25,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              QueueToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              AsynchToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
       responses:
         201:
           description: Token request saved successfully.
@@ -33,7 +33,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
               examples:
-                QueueToken: { $ref: '#/components/examples/AsyncTokenizationMockResponse' }
+                AsynchToken: { $ref: '#/components/examples/AsyncTokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -42,11 +42,41 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
+  /v1/trids/{id}/async-tokens/{id}/status:
+    x-model-version: 1.0
+    get:
+      tags: [ Token Status API ]
+      x-group-name: Tokenization
+      x-proxy-name: GetStatus
+      summary: Get Status of a aSych provision request.
+      description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
+      parameters:
+        - { $ref: '#/components/parameters/TRIDParam' }
+        - { $ref: '#/components/parameters/ContentTypeHeader' }
+        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
+        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
+        - { $ref: '#/components/parameters/XCardBrandHeader' }
+        - { $ref: '#/components/parameters/ProvisionRequestId' }
+      responses:
+        200:
+          description: Token status retrived successfully.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/StatusResponse' }
+              examples:
+                AsynchToken: { $ref: '#/components/examples/StatusMockResponse' }
+        400: { $ref: '#/components/responses/BadRequest' }
+        401: { $ref: '#/components/responses/Unauthorized' }
+        404: { $ref: '#/components/responses/NotFound' }
+        500: { $ref: '#/components/responses/ServerError' }
+        503: { $ref: '#/components/responses/ServiceUnavailable' }
+        504: { $ref: '#/components/responses/GatewayTimeout' }
+
   /v1/trids/{id}/tokens/{tokenReferenceId}:
     patch:
       tags: [ Token Lifecycle API ]
       x-group-name: Tokenization
-      x-proxy-name: Token Lifecycle
+      x-proxy-name: UpdateTokenStatus
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status by the Merchant.
       parameters:
@@ -81,7 +111,7 @@ paths:
     get:
       tags: [ Get Token API ]
       x-group-name: Tokenization
-      x-proxy-name: Get Token
+      x-proxy-name: GetToken
       summary: Retrieve information about a token.
       description: Retrieve information about a token using token reference Id
       parameters:
@@ -99,7 +129,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/ProvisionTokenResponse' }
               examples:
-                ProvisionToken: { $ref: '#/components/examples/TokenizationMockResponse' }
+                GetToken: { $ref: '#/components/examples/TokenizationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -111,7 +141,7 @@ paths:
     get:
       tags: [ Get Asset API ]
       x-group-name: Tokenization
-      x-proxy-name: Get Asset
+      x-proxy-name: GetAsset
       summary: Retrieve details about token asset, card band logo.
       description: Retrieve details about token asset, card band logo. Use the asset Id provided in tokenization webhook.
       parameters:
@@ -130,7 +160,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/GetAssetResponse' }
               examples:
-                ProvisionToken: { $ref: '#/components/examples/GetAssetMockResponse' }
+                Getasset: { $ref: '#/components/examples/GetAssetMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -142,7 +172,7 @@ paths:
     get:
       tags: [ Get Cryptogram API ]
       x-group-name: Tokenization
-      x-proxy-name: Get Cryptogram
+      x-proxy-name: GetCryptogram
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
       parameters:
@@ -160,7 +190,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/CryptoGramResponse' }
               examples:
-                Cryptogram: { $ref: '#/components/examples/CryptogramMockResposne' }
+                GetCryptogram: { $ref: '#/components/examples/CryptogramMockResposne' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -174,7 +204,7 @@ paths:
     post:
       tags: [ Merchant Notification API ]
       x-group-name: Notifications
-      x-proxy-name: Create Notification
+      x-proxy-name: CreateNotification
       summary: Send webhook notification to merchant.
       description: Send webhook notification to merchant once the token is provison by networks.
       parameters:
@@ -190,7 +220,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/NotificationRequest' }
             examples:
-              QueueToken: { $ref: '#/components/examples/NotificationMockRequest' }
+              Notification: { $ref: '#/components/examples/NotificationMockRequest' }
       responses:
         200:
           description: Token status updated successfully.
@@ -221,6 +251,14 @@ components:
       required: true
       description: Token Reference Id generated by networks for a PAN at the time of tokenization.
       example: "12345"
+    ProvisionRequestId:
+      x-model-version: 1.0
+      name: id
+      schema: { type: string }
+      in: path
+      required: true
+      description: Random UUID provided in response to asynch token API call - provisionRequestId.
+      example: "12345-oooopp-jjjdooo"
     AssetId:
       x-model-version: 1.0
       name: assetId
@@ -603,7 +641,7 @@ components:
 
     NotificationRequest:
       x-model-version: 1.0
-      title: Push notification request.
+      description: Push notification request.
       type: object
       required:
         - notification
@@ -613,6 +651,18 @@ components:
           $ref: '#/components/schemas/Notification'
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
+
+    StatusResponse:
+      x-model-version: 1.0
+      description: aSynch task status response.
+      type: object
+      properties:
+        tokenReferenceId:
+          description: A unique reference assigned following the allocation of a token used to identify the token for the duration of its lifetime.
+          type: string
+          example: "5001a9f027e5629d11e3949a0800a"
+          writeOnly: true
+
     Provision:
       x-model-version: 1.0
       description: Provision card information.
@@ -934,6 +984,10 @@ components:
           data: encrypted_data bianry
           height: '1024'
           width: '750'
+
+    StatusMockResponse:
+      value:
+        tokenReferenceId: 5001a9f027e5629d11e3949a0800a
 
     NotificationMockRequest:
       value:
