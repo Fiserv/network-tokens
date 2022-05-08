@@ -715,11 +715,11 @@ components:
       type: object
       required:
         - card
-        - TokenInfo
+        - tokenInfo
       properties:
         card:
           $ref: '#/components/schemas/Card'
-        token:
+        tokenInfo:
           $ref: '#/components/schemas/TokenInfo'
 
     MediaContents:
