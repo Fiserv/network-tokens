@@ -215,13 +215,13 @@ paths:
             examples:
               Notification: { $ref: '#/components/examples/NotificationMockRequest' }
       responses:
-        200:
+        204:
           description: Token status updated successfully.
           content:
             application/json:
               schema: { $ref: '#/components/schemas/NoContent' }
               examples:
-                LifeCycle: { $ref: '#/components/examples/NoContent' }
+                Notification: { $ref: '#/components/examples/NoContent' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -251,13 +251,13 @@ paths:
             examples:
               Notification: { $ref: '#/components/examples/NotificationMockRequest' }
       responses:
-        200:
+        204:
           description: Token status updated successfully.
           content:
             application/json:
               schema: { $ref: '#/components/schemas/NoContent' }
               examples:
-                LifeCycle: { $ref: '#/components/examples/NoContent' }
+                Notification: { $ref: '#/components/examples/NoContent' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
