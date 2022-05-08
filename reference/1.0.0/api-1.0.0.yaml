@@ -198,7 +198,7 @@ paths:
     post:
       tags: [ Merchant Notification API ]
       x-group-name: Notifications
-      x-proxy-name: CreateNotification
+      x-proxy-name: CreateTokenNotification
       summary: Send webhook notification to merchant with token details.
       description: Send webhook notification to merchant once the token is provison by networks.
       parameters:
@@ -234,8 +234,8 @@ paths:
     post:
       tags: [ Merchant Notification API]
       x-group-name: Notifications
-      x-proxy-name: CreateLifeCycleNotification
-      summary: Send webhook notification to merchant with Lifecycle updates.
+      x-proxy-name: TokenStateNotification
+      summary: Send webhook notification to merchant for token Lifecycle and expire updates.
       description: Send webhook notification to merchant if there is any chnage in the token State.
       parameters:
         - { $ref: '#/components/parameters/ContentTypeHeader' }
