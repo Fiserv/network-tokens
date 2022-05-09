@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36b253bc-3e1c-4dae-92b8-306639411494" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/reference/1.0.0/api-1.0.1.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/tenant.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/tenant.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/1.0.0/api-1.0.1.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
