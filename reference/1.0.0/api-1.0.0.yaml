@@ -249,7 +249,7 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/NotificationRequest' }
             examples:
-              Notification: { $ref: '#/components/examples/NotificationMockRequest' }
+              Notification: { $ref: '#/components/examples/NotificationLifeCycleMockRequest' }
       responses:
         204:
           description: Token status updated successfully.
@@ -1043,9 +1043,27 @@ components:
               alias: '1111'
               paymentAccountReferenceId: 5001a9f027e5629d11e3949a0800a
               tokenRequestorId: '2901'
-              fiservTokenRequestorId: MSTF-2901
               paymentToken: 5001a9f027e5629d11e3949a0800a
               provisionTokenId: 6001a9f027e5629d11e3949a0800a
+        cardBrand: VI
+
+    NotificationLifeCycleMockRequest:
+      value:
+        notification:
+          card:
+            alias: '4567'
+            expiryDate:
+              month: '09'
+              year: '20'
+          tokenInfo:
+            decision: ACTIVE
+            token:
+              tokenReferenceId: 5001a9f027e5629d11e3949a0800a
+              expiryDate:
+                month: '09'
+                year: '20'
+              alias: '1111'
+              tokenRequestorId: '2901'
         cardBrand: VI
 
     NoContent:
