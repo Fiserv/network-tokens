@@ -24,7 +24,9 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
             examples:
-              AsynchToken: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              AsynchTokenWithPan: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
+              AsynchTokenWithTAToken: { $ref: '#/components/examples/ProvisionTokenTAMockRequest' }
+
       responses:
         201:
           description: Token request saved successfully.
@@ -249,7 +251,9 @@ paths:
           application/json:
             schema: { $ref: '#/components/schemas/NotificationRequest' }
             examples:
-              Notification: { $ref: '#/components/examples/NotificationLifeCycleMockRequest' }
+              NotificationExpireUpdate: { $ref: '#/components/examples/NotificationLifeCycleMockRequest' }
+              NotificationOnlyStateUpdate: { $ref: '#/components/examples/NotificationLifeCycleStatusOnlyMockRequest' }
+
       responses:
         204:
           description: Token status updated successfully.
@@ -878,7 +882,11 @@ components:
           type: string
           writeOnly: true
           example: "6001a9f027e5629d11e3949a0800a"
-
+        tokenType:
+          description:  Required only in case if TransArmor Token to Netwrok Token conversion.
+          type: string
+          writeOnly: true
+          example: "2775"
 
     NoContent:
       x-model-version: 1.0
@@ -1003,6 +1011,14 @@ components:
               month: '12'
               year: '22'
 
+    ProvisionTokenTAMockRequest:
+      value:
+        provision:
+          tokenInfo:
+            token:
+              paymentToken: '5001a9f027e5629d11e3949a0800a'
+              tokenType: '2754'
+
     UpdateTokenMockRequest:
       value:
         operation: RESUME
@@ -1021,7 +1037,7 @@ components:
 
     StatusMockResponse:
       value:
-        tokenReferenceId: 5001a9f027e5629d11e3949a0800a
+        tokenReferenceId: '5001a9f027e5629d11e3949a0800a'
 
     NotificationMockRequest:
       value:
@@ -1055,6 +1071,20 @@ components:
             expiryDate:
               month: '09'
               year: '20'
+          tokenInfo:
+            decision: ACTIVE
+            token:
+              tokenReferenceId: 5001a9f027e5629d11e3949a0800a
+              expiryDate:
+                month: '09'
+                year: '20'
+              alias: '1111'
+              tokenRequestorId: '2901'
+        cardBrand: VI
+
+    NotificationLifeCycleStatusOnlyMockRequest:
+      value:
+        notification:
           tokenInfo:
             decision: ACTIVE
             token:
