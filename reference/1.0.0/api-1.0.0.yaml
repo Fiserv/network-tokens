@@ -9,7 +9,7 @@ paths:
     x-model-version: 1.0
     post:
       tags: [ Asynchronous Tokenization API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: CreateAsynchToken
       summary: aSynchronous a provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
@@ -47,7 +47,7 @@ paths:
     x-model-version: 1.0
     get:
       tags: [ Token Status API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: GetStatus
       summary: Get Status of a aSych provision request.
       description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
@@ -75,7 +75,7 @@ paths:
   /v1/tokens/{tokenReferenceId}:
     patch:
       tags: [ Merchant Initiated Token Lifecycle API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: UpdateTokenState
       summary: Merchant initiated lifecycle
       description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status by the Merchant.
@@ -109,7 +109,7 @@ paths:
 
     get:
       tags: [ Get Token API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: GetToken
       summary: Retrieve information about a token.
       description: Retrieve information about a token using token reference Id
@@ -138,7 +138,7 @@ paths:
   /v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
     get:
       tags: [ Get Asset API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: GetAsset
       summary: Retrieve details about token asset, card band logo.
       description: Retrieve details about token asset, card band logo. Use the asset Id provided in tokenization webhook.
@@ -168,7 +168,7 @@ paths:
   /v1/tokens/{tokenReferenceId}/cryptogram:
     get:
       tags: [ Get Cryptogram API ]
-      x-group-name: Tokenization
+      x-group-name: Network Tokens
       x-proxy-name: GetCryptogram
       summary: Cryptogram request for CIT transactions
       description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
@@ -199,7 +199,7 @@ paths:
     x-model-version: 1.0
     post:
       tags: [ Merchant Notification API ]
-      x-group-name: Notifications
+      x-group-name: Network Tokens
       x-proxy-name: CreateTokenNotification
       summary: Send webhook notification to merchant with token details.
       description: Send webhook notification to merchant once the token is provison by networks.
@@ -235,7 +235,7 @@ paths:
     x-model-version: 1.0
     post:
       tags: [ Merchant Notification API]
-      x-group-name: Notifications
+      x-group-name: Network Tokens
       x-proxy-name: TokenStateNotification
       summary: Send webhook notification to merchant for token Lifecycle and expire updates.
       description: Send webhook notification to merchant if there is any chnage in the token State.
@@ -880,11 +880,17 @@ components:
           type: string
           writeOnly: true
           example: "6001a9f027e5629d11e3949a0800a"
+        transArmorToken:
+          description:  Attribute for TransArmor token. Only for TA merchants.
+          type: string
+          writeOnly: true
+          example: "5204736190003139"
         tokenType:
           description:  Required only in case if TransArmor Token to Netwrok Token conversion.
           type: string
           writeOnly: true
           example: "2775"
+
 
     NoContent:
       x-model-version: 1.0
@@ -1014,7 +1020,7 @@ components:
         provision:
           tokenInfo:
             token:
-              paymentToken: '5001a9f027e5629d11e3949a0800a'
+              transArmorToken: '5204736190003139'
               tokenType: '2754'
 
     UpdateTokenMockRequest:
