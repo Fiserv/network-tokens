@@ -10,7 +10,7 @@ paths:
     post:
       tags: [ Asynchronous Tokenization API ]
       x-group-name: Network Tokens
-      x-proxy-name: AsynchTokenization
+      x-proxy-name: AsyncTokenization
       summary: aSynchronous a provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
@@ -48,7 +48,7 @@ paths:
     get:
       tags: [ Token Status API ]
       x-group-name: Network Tokens
-      x-proxy-name: TokenizationStaus
+      x-proxy-name: AsyncTokenizationStaus
       summary: Get Status of a aSych provision request.
       description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
       parameters:
@@ -110,7 +110,7 @@ paths:
     get:
       tags: [ Get Token API ]
       x-group-name: Network Tokens
-      x-proxy-name: Token
+      x-proxy-name: TokenDetail
       summary: Retrieve information about a token.
       description: Retrieve information about a token using token reference Id
       parameters:
