@@ -715,9 +715,6 @@ components:
       x-model-version: 1.0
       description: Notification request structure
       type: object
-      required:
-        - card
-        - tokenInfo
       properties:
         card:
           $ref: '#/components/schemas/Card'
