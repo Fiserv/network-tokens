@@ -197,11 +197,11 @@ paths:
   /v1/async-tokens/{provisionRequestId}:
     x-model-version: 1.0
     get:
-      tags: [ Merchant Notification API ]
+      tags: [ Get Token Details API ]
       x-group-name: Network Tokens
-      x-proxy-name: TokenNotification
-      summary: Send webhook notification to merchant with token details.
-      description: Send webhook notification to merchant once the token is provison by networks.
+      x-proxy-name: aSyncTokenDetail
+      summary: API to get token Details by provisionRquestId.
+      description: API to get token Details by provisionRquestId.
       parameters:
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
@@ -229,9 +229,9 @@ paths:
     post:
       tags: [ Merchant Notification API]
       x-group-name: Network Tokens
-      x-proxy-name: TokenStateNotification
-      summary: Send webhook notification to merchant for token Lifecycle and expire updates.
-      description: Send webhook notification to merchant if there is any chnage in the token State.
+      x-proxy-name: Eventnotification
+      summary: Send webhook notification to merchant for different Event Type.
+      description: Send webhook notification to merchant for different Event Type.Based on Event Type merchant can call /v1/tokens{id} API or /v1/async-tokens/{id} API to get the token details,
       parameters:
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
