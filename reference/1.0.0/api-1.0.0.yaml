@@ -194,10 +194,9 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-
-  /v1/async-tokens/{provisionRequestId}/notifications:
+  /v1/async-tokens/{provisionRequestId}:
     x-model-version: 1.0
-    post:
+    get:
       tags: [ Merchant Notification API ]
       x-group-name: Network Tokens
       x-proxy-name: TokenNotification
@@ -209,21 +208,15 @@ paths:
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
         - { $ref: '#/components/parameters/XCardBrandHeader' }
         - { $ref: '#/components/parameters/ProvisionRequestId' }
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { $ref: '#/components/schemas/NotificationRequest' }
-            examples:
-              Notification: { $ref: '#/components/examples/NotificationMockRequest' }
+
       responses:
-        204:
+        200:
           description: Token status updated successfully.
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/NoContent' }
+              schema: { $ref: '#/components/schemas/NotificationResponse' }
               examples:
-                Notification: { $ref: '#/components/examples/NoContent' }
+                Notification: { $ref: '#/components/examples/NotificationMockResponse' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -231,7 +224,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/tokens/{tokenReferenceId}/notifications:
+  /v1/notifications/:
     x-model-version: 1.0
     post:
       tags: [ Merchant Notification API]
@@ -243,25 +236,18 @@ paths:
         - { $ref: '#/components/parameters/ContentTypeHeader' }
         - { $ref: '#/components/parameters/AcceptLanguageHeader' }
         - { $ref: '#/components/parameters/ClientRequestIdHeader' }
-        - { $ref: '#/components/parameters/XCardBrandHeader' }
-        - { $ref: '#/components/parameters/TokenReferenceId' }
+
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: '#/components/schemas/NotificationRequest' }
+            schema: { $ref: '#/components/schemas/EventNotificationRequest' }
             examples:
-              NotificationExpireUpdate: { $ref: '#/components/examples/NotificationLifeCycleMockRequest' }
-              NotificationOnlyStateUpdate: { $ref: '#/components/examples/NotificationLifeCycleStatusOnlyMockRequest' }
+              EventNotificationTokensMockRequest: { $ref: '#/components/examples/EventNotificationTokensMockRequest' }
+              EventNotificationAsyncMockRequest: { $ref: '#/components/examples/EventNotificationAsyncMockRequest' }
 
       responses:
-        204:
-          description: Token status updated successfully.
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/NoContent' }
-              examples:
-                Notification: { $ref: '#/components/examples/NoContent' }
+        204: { $ref: '#/components/schemas/NoContent' }
         400: { $ref: '#/components/responses/BadRequest' }
         401: { $ref: '#/components/responses/Unauthorized' }
         404: { $ref: '#/components/responses/NotFound' }
@@ -534,6 +520,24 @@ components:
   # response Models
   #-------------------------------------
   schemas:
+    Link:
+      description: Model to communicate linked resources. In this scenario, payment url per recipeint should be returned.
+      type: object
+      required:
+        - href
+        - method
+      properties:
+        href:
+          description: URL to linked resource.
+          type: string
+          format: uri
+          example: https://cert.fiservapps.com/v1/async-tokens/6001a9f027e5629d11e3949a0800a
+        method:
+          description: Defines the HTTP method for the given href.
+          type: string
+          default: "GET"
+          example:
+            "GET"
     Error:
       x-model-version: 1.0
       description: Error information.
@@ -677,7 +681,7 @@ components:
         mediaContents:
           $ref: '#/components/schemas/MediaContents'
 
-    NotificationRequest:
+    NotificationResponse:
       x-model-version: 1.0
       description: Push notification request.
       type: object
@@ -893,9 +897,37 @@ components:
       x-model-version: 1.0
       description: The request succeeded but there’s really nothing to show.
 
+    EventNotificationRequest:
+      x-model-version: 1.0
+      description: The Event notification request form Fiserv To Merchant
+      type: object
+      writeOnly: true
+      properties:
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        link:
+          $ref: '#/components/schemas/Link'
+        id:
+          description:  Reference Id for get call.
+          type: string
+          example: "6001a9f027e5629d11e3949a0800a"
+        cardBrand:
+          $ref: '#/components/schemas/CardBrand'
+
     #-------------------------------------
     # ENUM Models
     #-------------------------------------
+
+    EventType:
+      x-model-version: 1.0
+      description: Types of notificaton events
+      type: string
+      readOnly: true
+      example: ACTIVE
+      enum:
+        - TOKEN_UPDATE
+        - PAN_EXPIRE_UPDATE
+        - TOKEN_STATE_UPDATE
 
     TokenStatus:
       x-model-version: 1.0
@@ -1040,7 +1072,7 @@ components:
       value:
         tokenReferenceId: '5001a9f027e5629d11e3949a0800a'
 
-    NotificationMockRequest:
+    NotificationMockResponse:
       value:
         notification:
           card:
@@ -1064,7 +1096,7 @@ components:
               provisionTokenId: 6001a9f027e5629d11e3949a0800a
         cardBrand: VI
 
-    NotificationLifeCycleMockRequest:
+    NotificationLifeCycleMockResponse:
       value:
         notification:
           card:
@@ -1083,7 +1115,7 @@ components:
               tokenRequestorId: '2901'
         cardBrand: VI
 
-    NotificationLifeCycleStatusOnlyMockRequest:
+    NotificationLifeCycleStatusOnlyMockResponse:
       value:
         notification:
           tokenInfo:
@@ -1095,6 +1127,24 @@ components:
                 year: '20'
               alias: '1111'
               tokenRequestorId: '2901'
+        cardBrand: VI
+
+    EventNotificationAsyncMockRequest:
+      value:
+        eventType: TOKEN_UPDATE
+        link:
+          href: https://cert.fiservapps.com/v1/async-tokens/5001a9f027e5629d11e3949a0800a
+          method: get
+        id: 5001a9f027e5629d11e3949a0800a
+        cardBrand: VI
+
+    EventNotificationTokensMockRequest:
+      value:
+        eventType: TOKEN_UPDATE
+        link:
+          href: https://cert.fiservapps.com/v1/tokens/5001a9f027e5629d11e3949a0800a11
+          method: get
+        id: 5001a9f027e5629d11e3949a0800a11
         cardBrand: VI
 
     NoContent:
