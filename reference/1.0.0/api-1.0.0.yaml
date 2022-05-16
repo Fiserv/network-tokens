@@ -48,7 +48,7 @@ paths:
     get:
       tags: [ Token Status API ]
       x-group-name: Network Tokens
-      x-proxy-name: AsyncTokenizationStatus
+      x-proxy-name: AsyncTokenizationStaus
       summary: Get Status of a aSych provision request.
       description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
       parameters:
@@ -194,36 +194,6 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/async-tokens/{provisionRequestId}:
-    x-model-version: 1.0
-    get:
-      tags: [ Get Token Details API ]
-      x-group-name: Network Tokens
-      x-proxy-name: aSyncTokenDetail
-      summary: API to get token Details by provisionRquestId.
-      description: API to get token Details by provisionRquestId.
-      parameters:
-        - { $ref: '#/components/parameters/ContentTypeHeader' }
-        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
-        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
-        - { $ref: '#/components/parameters/XCardBrandHeader' }
-        - { $ref: '#/components/parameters/ProvisionRequestId' }
-
-      responses:
-        200:
-          description: Token status updated successfully.
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/NotificationResponse' }
-              examples:
-                Notification: { $ref: '#/components/examples/NotificationMockResponse' }
-        400: { $ref: '#/components/responses/BadRequest' }
-        401: { $ref: '#/components/responses/Unauthorized' }
-        404: { $ref: '#/components/responses/NotFound' }
-        500: { $ref: '#/components/responses/ServerError' }
-        503: { $ref: '#/components/responses/ServiceUnavailable' }
-        504: { $ref: '#/components/responses/GatewayTimeout' }
-
   /v1/notifications/:
     x-model-version: 1.0
     post:
@@ -244,7 +214,6 @@ paths:
             schema: { $ref: '#/components/schemas/EventNotificationRequest' }
             examples:
               EventNotificationTokensMockRequest: { $ref: '#/components/examples/EventNotificationTokensMockRequest' }
-              EventNotificationAsyncMockRequest: { $ref: '#/components/examples/EventNotificationAsyncMockRequest' }
 
       responses:
         204: { $ref: '#/components/schemas/NoContent' }
@@ -911,8 +880,7 @@ components:
           description:  Reference Id for get call.
           type: string
           example: "6001a9f027e5629d11e3949a0800a"
-        cardBrand:
-          $ref: '#/components/schemas/CardBrand'
+
 
     #-------------------------------------
     # ENUM Models
@@ -1129,23 +1097,14 @@ components:
               tokenRequestorId: '2901'
         cardBrand: VI
 
-    EventNotificationAsyncMockRequest:
-      value:
-        eventType: TOKEN_UPDATE
-        link:
-          href: https://cert.fiservapps.com/v1/async-tokens/5001a9f027e5629d11e3949a0800a
-          method: get
-        id: 5001a9f027e5629d11e3949a0800a
-        cardBrand: VI
-
     EventNotificationTokensMockRequest:
       value:
-        eventType: TOKEN_UPDATE
+        eventType: PAN_EXPIRE_UPDATE
+        id: 5001a9f027e5629d11e3949a0800a11
         link:
           href: https://cert.fiservapps.com/v1/tokens/5001a9f027e5629d11e3949a0800a11
           method: get
-        id: 5001a9f027e5629d11e3949a0800a11
-        cardBrand: VI
+
 
     NoContent:
       value:
