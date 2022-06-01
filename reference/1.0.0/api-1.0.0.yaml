@@ -5,12 +5,12 @@ servers:
   - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
   - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
-  /v1/async-tokens:
+  /v1/netwrok-tokens:
     x-model-version: 1.0
     post:
       tags: [ Asynchronous Tokenization API ]
       x-group-name: Network Tokens
-      x-proxy-name: AsyncTokenization
+      x-proxy-name: NetwrokTokenization
       summary: aSynchronous a provision token request.
       description: This API will provision token for a PAN Asynchronously with Network Services.
       parameters:
@@ -43,12 +43,12 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/async-tokens/{provisionRequestId}/status:
+  /v1/Netwrok-tokens/{provisionRequestId}/status:
     x-model-version: 1.0
     get:
       tags: [ Token Status API ]
       x-group-name: Network Tokens
-      x-proxy-name: AsyncTokenizationStaus
+      x-proxy-name: NetwrokTokenizationStaus
       summary: Get Status of a aSych provision request.
       description: Provides the status of aSych provision request. Returns token reference Id if tokenization is successfull.
       parameters:
