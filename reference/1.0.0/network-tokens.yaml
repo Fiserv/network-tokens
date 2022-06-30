@@ -5,7 +5,7 @@ servers:
   - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
   - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
-  /v1/netwrok-tokens:
+  /payments-vas/v1/netwrok-tokens:
     x-model-version: 1.0
     post:
       tags: [ Asynchronous Tokenization API ]
@@ -43,7 +43,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/Netwrok-tokens/{provisionRequestId}/status:
+  /payments-vas/v1/Netwrok-tokens/{provisionRequestId}/status:
     x-model-version: 1.0
     get:
       tags: [ Token Status API ]
@@ -72,7 +72,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/tokens/{tokenReferenceId}:
+  /payments-vas/v1/tokens/{tokenReferenceId}:
     patch:
       tags: [ Merchant Initiated Token Lifecycle API ]
       x-group-name: Network Tokens
@@ -135,7 +135,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
+  /payments-vas/v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
     get:
       tags: [ Get Asset API ]
       x-group-name: Network Tokens
@@ -165,7 +165,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/tokens/{tokenReferenceId}/cryptogram:
+  /payments-vas/v1/tokens/{tokenReferenceId}/cryptogram:
     get:
       tags: [ Get Cryptogram API ]
       x-group-name: Network Tokens
@@ -194,7 +194,7 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /v1/notifications/:
+  /payments-vas/v1/notifications/:
     x-model-version: 1.0
     post:
       tags: [ Merchant Notification API]
