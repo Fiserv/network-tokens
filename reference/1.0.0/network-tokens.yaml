@@ -5,48 +5,71 @@ servers:
   - { url: 'https:// cert.api.fiservapps.com', description: Cert Sandbox }
   - { url: 'https:// qa.api.fiservapps.com', description: QA Sandbox }
 paths:
-  /payments-vas/v1/netwrok-tokens:
+  /network-tokens/v1/tokens:
     x-model-version: 1.0
     post:
-      tags: [ Asynchronous Tokenization API ]
+      tags:
+        - Tokenization Endpoint Definition
       x-group-name: Network Tokens
-      x-proxy-name: NetwrokTokenization
-      summary: aSynchronous a provision token request.
-      description: This API will provision token for a PAN Asynchronously with Network Services.
-      parameters:
-        - { $ref: '#/components/parameters/ContentTypeHeader' }
-        - { $ref: '#/components/parameters/AcceptLanguageHeader' }
-        - { $ref: '#/components/parameters/ClientRequestIdHeader' }
-        - { $ref: '#/components/parameters/XCardBrandHeader' }
+      x-proxy-name: Tokenization
+      summary: Provision a token for a PAN request.
+      description: This API provisions token for a PAN with different networks - Visa, Mastercard, Amex, Discover.
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: '#/components/schemas/ProvisionTokenRequest' }
+            schema:
+              $ref: '#/components/schemas/ProvisionRequest'
             examples:
-              AsynchTokenWithPan: { $ref: '#/components/examples/ProvisionTokenMockRequest' }
-              AsynchTokenWithTAToken: { $ref: '#/components/examples/ProvisionTokenTAMockRequest' }
+              PaymentCardProvision:
+                summary: PaymentCard to Network Token
+                $ref: '#/components/examples/PaymentCardProvisionRequest'
+              PaymentTokenProvision:
+                summary: TransArmor to Network Token
+                $ref: '#/components/examples/PaymentTokenProvisionRequest'
 
       responses:
         201:
           description: Token request saved successfully.
           content:
             application/json:
-              schema: { $ref: '#/components/schemas/ProvisionQueueResponse' }
+              schema:
+                $ref: '#/components/schemas/ProvisionResponse'
               examples:
-                AsynchToken: { $ref: '#/components/examples/AsyncTokenizationMockResponse' }
-        400: { $ref: '#/components/responses/BadRequest' }
-        401: { $ref: '#/components/responses/Unauthorized' }
-        404: { $ref: '#/components/responses/NotFound' }
-        429: { $ref: '#/components/responses/TooManyRequest' }
-        500: { $ref: '#/components/responses/ServerError' }
-        503: { $ref: '#/components/responses/ServiceUnavailable' }
-        504: { $ref: '#/components/responses/GatewayTimeout' }
+                ProvisionQueueResponse:
+                  summary: Tokenization aSynch Response
+                  $ref: '#/components/examples/ProvisionQueueResponse'
+                ProvisionTokenResponse:
+                  summary: Tokenization Token Response
+                  $ref: '#/components/examples/ProvisionTokenResponse'
+                ProvisionTAResponse:
+                  summary: TA Token Response
+                  $ref: '#/components/examples/ProvisionTAResponse'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        408:
+          $ref: '#/components/responses/RequestTimeout'
+        415:
+          $ref: '#/components/responses/UnsupportedMediaType'
+        425:
+          $ref: '#/components/responses/TooEarly'
+        429:
+          $ref: '#/components/responses/TooManyRequest'
+        500:
+          $ref: '#/components/responses/ServerError'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
 
-  /payments-vas/v1/Netwrok-tokens/{provisionRequestId}/status:
+  /network-tokens/v1/tokens/{provisionRequestId}/status:
     x-model-version: 1.0
     get:
-      tags: [ Token Status API ]
+      tags: [ Tokenization Status ]
       x-group-name: Network Tokens
       x-proxy-name: NetwrokTokenizationStaus
       summary: Get Status of a aSych provision request.
@@ -72,9 +95,9 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /payments-vas/v1/tokens/{tokenReferenceId}:
+  /network-tokens/v1/tokens/{tokenReferenceId}:
     patch:
-      tags: [ Merchant Initiated Token Lifecycle API ]
+      tags: [ Lifecycle  ]
       x-group-name: Network Tokens
       x-proxy-name: TokenState
       summary: Merchant initiated lifecycle
@@ -108,7 +131,7 @@ paths:
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
     get:
-      tags: [ Get Token API ]
+      tags: [ Token Lookup ]
       x-group-name: Network Tokens
       x-proxy-name: TokenDetail
       summary: Retrieve information about a token.
@@ -135,9 +158,9 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /payments-vas/v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
+  /network-tokens/v1/tokens/{tokenReferenceId}/assets/{cardBrandLogoAssetId}:
     get:
-      tags: [ Get Asset API ]
+      tags: [ Asset ]
       x-group-name: Network Tokens
       x-proxy-name: Asset
       summary: Retrieve details about token asset, card band logo.
@@ -165,9 +188,9 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /payments-vas/v1/tokens/{tokenReferenceId}/cryptogram:
+  /network-tokens/v1/tokens/{tokenReferenceId}/cryptogram:
     get:
-      tags: [ Get Cryptogram API ]
+      tags: [ Cryptogram ]
       x-group-name: Network Tokens
       x-proxy-name: Cryptogram
       summary: Cryptogram request for CIT transactions
@@ -194,10 +217,10 @@ paths:
         503: { $ref: '#/components/responses/ServiceUnavailable' }
         504: { $ref: '#/components/responses/GatewayTimeout' }
 
-  /payments-vas/v1/notifications/:
+  /network-tokens/v1/notifications/:
     x-model-version: 1.0
     post:
-      tags: [ Merchant Notification API]
+      tags: [ Notification ]
       x-group-name: Network Tokens
       x-proxy-name: Eventnotification
       summary: Send webhook notification to merchant for different Event Type.
@@ -341,7 +364,7 @@ components:
             error:
               - {
                 code: "400003",
-                message: "Example Error",
+                message: "Example ErrorResponse",
                 category: "Bad Request",
                 developerInfo: {
                   developerMessage: "Invalid Message format in request payload",
@@ -365,7 +388,7 @@ components:
       description: The requested resource does not exist.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -386,7 +409,7 @@ components:
       description: The request was timed out due to not receiving the request in time.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -407,7 +430,7 @@ components:
       description: The media type is not supported.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -421,7 +444,7 @@ components:
       description: Too many request were sent.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -438,7 +461,7 @@ components:
       description: An unexpected internal server error occurred.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -455,7 +478,7 @@ components:
       description: The service was unavailable.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -472,7 +495,7 @@ components:
       description: The request timed out while waiting for a response.
       content:
         application/json:
-          schema: { $ref: '#/components/schemas/Error' }
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
           example:
             error:
               - {
@@ -485,6 +508,21 @@ components:
                 }
               }
 
+    TooEarly:
+      x-model-version: 1.0
+      description: 'The request was sent too early.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            gatewayResponse:
+              transactionProcessingDetails:
+                apiTraceId: '7027b61dbf7645399d204dbfa0de0870'
+                clientRequestId: '9bb0664a21fc48e3a1cef1f067fced3f'
+            error:
+              - type: 'GATEWAY'
+                message: 'The request was sent too early.'
   #-------------------------------------
   # response Models
   #-------------------------------------
@@ -507,6 +545,18 @@ components:
           default: "GET"
           example:
             "GET"
+
+    ErrorResponse:
+      x-model-version: 1.0
+      description: 'Response containing an error object.'
+      properties:
+        gatewayResponse:
+          $ref: '#/components/schemas/GatewayResponse'
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+
     Error:
       x-model-version: 1.0
       description: Error information.
@@ -536,6 +586,311 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldError'
+
+    GatewayResponse:
+      x-model-version: 1.0
+      description: 'Contains the <a href="../docs?path=docs/Resources/Master-Data/Gateway-Response.md">gateway response</a> details.'
+      properties:
+        transactionType:
+          type: string
+          maxLength: 256
+          description: 'Transaction type performed.'
+          example: 'CHARGE'
+        transactionState:
+          type: string
+          maxLength: 256
+          description: 'Final state of the transaction.'
+          example: 'AUTHORIZED'
+        transactionOrigin:
+          type: string
+          maxLength: 4
+          description: 'Transaction origin based on original request.'
+          example: 'ECOM'
+        ###internal##
+        gatewayTransactionId:
+          type: string
+          description: 'Transaction ID sent back by downstream (internal to Commerce Hub persistence).'
+        gatewayName:
+          type: string
+          description: 'Gateway name sent back by downstream (internal to Commerce Hub persistence).'
+        gatewayOrderId:
+          type: string
+          description: 'Order ID sent back by downstream (internal to Commerce Hub persistence).'
+        componentElapsedTime:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComponentElapsedTime'
+        ##/internal##
+        transactionProcessingDetails:
+          $ref: '#/components/schemas/TransactionProcessingDetails'
+
+    TransactionProcessingDetails:
+      x-model-version: 1.0
+      description: 'Contains the <a href="../docs?path=docs/Resources/Master-Data/Gateway-Response.md#transaction-processing-details">transaction response</a> details.'
+      properties:
+        orderId:
+          type: string
+          maxLength: 40
+          description: 'Order identifier returned in the parameter orderId from a Charge transaction.'
+          example: 'R-3b83fca8-2f9c-4364-86ae-12c91f1fcf16'
+        transactionTimestamp:
+          type: string
+          format: date-time
+          description: 'Date and time the transaction occurred in YYYY-MM-DDThh:mm:ssZ format.'
+          example: '2016-04-16T16:06:05Z'
+        apiTraceId:
+          pattern: '^[a-f0-9]{32}$'
+          type: string
+          maxLength: 32
+          description: 'Request identifier in API that can be used to request logs from the support team.'
+          example: '1234567a1234567b1234567c1234567d'
+        clientRequestId:
+          type: string
+          maxLength: 64
+          description: 'Echoes back the value in the request header for tracking.'
+          example: '30dd879c-ee2f-11db-8314-0800200c9a66'
+        transactionId:
+          type: string
+          maxLength: 40
+          description: 'Unique identifier for each transaction on the gateway. This value will be populated for the secondary transaction from the path.'
+          example: '838916029301'
+
+    ComponentElapsedTime:
+      x-model-version: 1.0
+      properties:
+        apiTraceId:
+          pattern: '^[a-f0-9]{32}$'
+          type: string
+          maxLength: 32
+          description: 'Request identifier in API that can be used to request logs from the support team.'
+          example: '1234567a1234567b1234567c1234567d'
+        clientId:
+          type: string
+          maxLength: 64
+          description: 'Echoes back the value in the request header for tracking.'
+          example: '30dd879c-ee2f-11db-8314-0800200c9a66'
+          deprecated: true
+        clientRequestId:
+          type: string
+          maxLength: 64
+          description: 'Echoes back the value in the request header for tracking.'
+          example: '30dd879c-ee2f-11db-8314-0800200c9a66'
+        requestTimestamp:
+          type: string
+          format: date-time
+          description: 'Date and time of the request in YYYY-MM-DDThh:mm:ss.SSSXXX format.'
+          example: '2016-04-16T16:06:05.000-05:00'
+        responseTimestamp:
+          type: string
+          format: date-time
+          description: 'Date and time of the response in YYYY-MM-DDThh:mm:ss.SSSXXX format.'
+          example: '2016-04-16T16:06:05.000-05:00'
+        elapsedTime:
+          type: integer
+          format: int32
+          description: 'Elapsed time between request and response represented in milliseconds.'
+          example: '700'
+        component:
+          type: string
+          description: 'Name of the component sending the time elapsed report.'
+          example: 'APIGEE'
+        status:
+          type: string
+          description: 'Status of the transaction.'
+          example: 'SUCCESS'
+        category:
+          type: string
+          description: 'Supported values are INTERNAL or EXTERNAL.'
+          example: 'INTERNAL'
+        sequence:
+          type: integer
+          format: int32
+          description: 'Denotes the exceution sequence and the delegate invoked/to be invoked.'
+          example: '2'
+    ##/intermediate##
+
+    ProvisionRequest:
+      x-model-version: 1.0
+      properties:
+        source:
+          $ref: '#/components/schemas/Source'
+
+    Source:
+      x-model-version: 1.0
+      description: 'Payment <a href="../docs?path=docs/Resources/Guides/Payment-Sources/Source-Type.md">source</a> details.'
+      required:
+        - sourceType
+      discriminator:
+        propertyName: sourceType
+      properties:
+        sourceType:
+          type: string
+          maxLength: 256
+          description: |+
+            Payment source type for a transaction request.
+
+            Valid Values:
+            * <a href="../docs?path=docs/Online-Mobile-Digital/Wallets-AltPayments/Apple-Pay/Apple-Pay.md">ApplePay</a>
+            * <a href="../docs?path=docs/Resources/Guides/Payment-Sources/Payment-Card.md">PaymentCard</a>
+            * <a href="../docs?path=docs/Resources/API-Documents/Payments_VAS/Payment-Token.md">PaymentToken</a>
+          example: 'PaymentCard'
+
+    ProvisionResponse:
+      x-model-version: 1.0
+      properties:
+        gatewayResponse:
+          $ref: '#/components/schemas/GatewayResponse'
+        source:
+          $ref: '#/components/schemas/Source'
+
+    PaymentToken:
+      x-model-version: 1.0
+      allOf:
+        - $ref: '#/components/schemas/Source'
+        - $ref: '#/components/schemas/Token'
+        - type: object
+          properties:
+            tokenData:
+              type: string
+              maxLength: 2048
+              description: 'Token created from the payment source.'
+              example: '1234123412340019'
+            PARId:
+              type: string
+              maxLength: 256
+              description: 'Payment Account Reference ID (PARID) for tokens. Ties transactions with multiple payment sources or tokens to a customer.'
+            declineDuplicates:
+              type: boolean
+              description: 'Identifies if a duplicate create token should be rejected when one has already been created for the payment source.'
+              example: false
+            tokenSource:
+              type: string
+              maxLength: 256
+              description: 'Source for the Token Service Provider (TSP).'
+              example: 'TRANSARMOR'
+            card:
+              $ref: '#/components/schemas/Card'
+
+    Card:
+      x-model-version: 1.0
+      description: 'Common <a href="../docs?path=docs/Resources/Master-Data/Card.md">card</a> data for a transaction request and response.'
+      properties:
+        cardData:
+          type: string
+          maxLength: 256
+          description: 'Card number or encrypted data.'
+          example: '4005550000000019'
+        nameOnCard:
+          type: string
+          maxLength: 256
+          description: 'Cardholder name.'
+          example: 'Jane Smith'
+        expirationMonth:
+          pattern: '^(0[1-9]|1[012])$'
+          type: string
+          description: '2-digit expiration month.'
+          example: '05'
+        expirationYear:
+          pattern: '^[0-9]{4}$'
+          type: string
+          maxLength: 4
+          description: '4-digit expiration year.'
+          example: '2035'
+        securityCode:
+          type: string
+          maxLength: 4
+          description: 'Card Security Code (CSC), Card Verification Data (CVD), Card Verification Number (CVN), Card Verification Value (CVV), Card Verification Code (CVC), Verification Code (V-code or V code), or Signature Panel Code (SPC).'
+          example: '111'
+        securityCodeIndicator:
+          type: string
+          maxLength: 15
+          description: |+
+            Indicates how the security code is passed.
+
+            Valid Values:
+            * NOT_SUPPORTED (Default)
+            * PROVIDED
+            * VALUE_ILLEGIBLE
+            * NOT_AVAILABLE
+          example: 'PROVIDED'
+        bin:
+          type: string
+          maxLength: 8
+          description: 'Bank Identification Number (BIN), the initial set of four to six numbers of the Primary Account Number (PAN). The BIN identifies the issuer and Level 2/3 qualifications.'
+          example: '400555'
+        last4:
+          type: string
+          maxLength: 4
+          description: 'Contains the last four digits of the Primary Account Number (PAN).'
+          example: '0019'
+        scheme:
+          type: string
+          maxLength: 256
+          description: 'Card brand.'
+          example: 'VISA'
+        beginningBalance:
+          type: number
+          maximum: 999999999999999999.999
+          description: 'Beginning card balance.'
+          example: '1.00'
+        endingBalance:
+          type: number
+          maximum: 999999999999999999.999
+          description: 'Ending card balance.'
+          example: '0.10'
+
+
+    Token:
+      x-model-version: 1.0
+      description: 'Common <a href="../docs?path=docs/Resources/Master-Data/Network-Token.md">NetworkToken</a> request and response data.'
+      properties:
+        tokenReferenceId:
+          type: string
+          maxLength: 64
+          description: 'A unique reference assigned following the allocation of a token used to identify the token for the duration of its lifetime.'
+          example: '5001a9f027e5629d11e3949a0800a'
+        expirationMonth:
+          pattern: '^(0[1-9]|1[012])$'
+          type: string
+          description: '2-digit expiration month.'
+          example: '05'
+        expirationYear:
+          pattern: '^[0-9]{4}$'
+          type: string
+          maxLength: 4
+          description: '4-digit expiration year.'
+        last4:
+          type: string
+          maxLength: 4
+          description: 'Contains the last four digits of the Primary Account Number (PAN).'
+          example: '0019'
+        paymentAccountReferenceId:
+          type: string
+          maxLength: 64
+          description: 'The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by networks or the Issuer provides PAR in the authorization message response.'
+          example: '5001a9f027e5629d11e3949a0800a'
+        tokenRequestorId:
+          type: string
+          maxLength: 16
+          description: 'Unique Id that identifies the entity for which the token request is being conducted.'
+          example: '50175692476'
+        provisionTokenId:
+          type: string
+          maxLength: 64
+          description: ' This will be returned only for VISA tokenization.'
+          example: '46d233d2780ba4480c1f1e6abd4f7002'
+        decision:
+          type: string
+          maxLength: 15
+          description: |+
+            Indicates the transaction types.
+
+            Valid Values:
+            * ACTIVE (Default)
+            * SUSPEND
+            * DELETE
+          example: 'ACTIVE'
+
 
     FieldError:
       x-model-version: 1.0
@@ -724,33 +1079,6 @@ components:
           example: "750"
           readOnly: true
 
-    Card:
-      x-model-version: 1.0
-      description: Information on a credit account
-      type: object
-      properties:
-        cardNumber:
-          description: Primary account number, can only be sent when vaulting an account.  This field will NOT be present in responses.
-          type: string
-          example: "4111111111111111"
-        alias:
-          description: Last four values of the cardNumber
-          type: string
-          writeOnly: true
-          example: "4567"
-        cardBrandLogoAssetId:
-          description: Asset associated with Card.
-          type: string
-          example: "SOME_RANDOM_ID"
-          writeOnly: true
-        cardBrandDescription:
-          description: A short description for this product. Always returned in Product Configuration object.
-          type: string
-          example: "SHORT_DESCRIPTION"
-          writeOnly: true
-        expiryDate:
-          $ref: '#/components/schemas/ExpiryDate'
-
     CryptoGram:
       x-model-version: 1.0
       description: Cryptogram resposne to merchant.
@@ -804,63 +1132,6 @@ components:
           $ref: '#/components/schemas/TokenStatus'
         token:
           $ref: '#/components/schemas/Token'
-
-    Token:
-      x-model-version: 1.0
-      description: Information related to network Tokens
-      type: object
-      writeOnly: true
-      properties:
-        tokenReferenceId:
-          description: A unique reference assigned following the allocation of a token used to identify the token for the duration of its lifetime.
-          type: string
-          example: "5001a9f027e5629d11e3949a0800a"
-          writeOnly: true
-        expiryDate:
-          $ref: '#/components/schemas/ExpiryDate'
-        alias:
-          description: Last four values of the token
-          type: string
-          example: "1111"
-          writeOnly: true
-        paymentAccountReferenceId:
-          description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by netwroks or the Issuer provides PAR in the authorization message response.
-          type: string
-          writeOnly: true
-          example: "5001a9f027e5629d11e3949a0800a"
-        tokenRequestorId:
-          description: Unique ID that identifies the entity for which the token request is being conducted.
-          type: string
-          maximum: 11
-          writeOnly: true
-          example: "2901"
-        fiservTokenRequestorId:
-          description: Unique ID mapes to tokenRequestorId. Unique per merchant.
-          type: string
-          maximum: 11
-          readOnly: true
-          example: "MSTF-2901"
-        paymentToken:
-          description: The Token for a PAN. This should be used for auth.
-          type: string
-          writeOnly: true
-          example: "5001a9f027e5629d11e3949a0800a"
-        provisionTokenId:
-          description: This will be returned only for VISA tokenization.
-          type: string
-          writeOnly: true
-          example: "6001a9f027e5629d11e3949a0800a"
-        transArmorToken:
-          description:  Attribute for TransArmor token. Only for TA merchants.
-          type: string
-          writeOnly: true
-          example: "5204736190003139"
-        tokenType:
-          description:  Required only in case if TransArmor Token to Netwrok Token conversion.
-          type: string
-          writeOnly: true
-          example: "2775"
-
 
     NoContent:
       x-model-version: 1.0
@@ -955,6 +1226,187 @@ components:
         - OTHER
 
   examples:
+
+    PaymentCardProvisionRequest:
+      value:
+        source:
+          sourceType: 'PaymentCard'
+          card:
+            cardData: '4005550000000019'
+            expirationMonth: '02'
+            expirationYear: '2035'
+            scheme: 'VISA'
+        merchantDetails:
+          terminalId: '123456'
+          merchantId: '123456789012345'
+
+    PaymentTokenProvisionRequest:
+      value:
+        source:
+          sourceType: 'PaymentToken'
+          tokenData: '1234560000000019'
+          tokenSource: 'TRANSARMOR'
+        merchantDetails:
+          terminalId: '123456'
+          merchantId: '123456789012345'
+
+    ProvisionQueueResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2021-06-20T23:42:48Z'
+            apiTraceId: '362866ac81864d7c9d1ff8b5aa6e98db'
+            clientRequestId: '30dd879c-ee2f-11db-8314-0800200c9a66'
+            transactionId: '362866ac81864d7c9d1ff8b5aa6e98db'
+        source:
+          card:
+            bin: '40055500'
+            last4: '0019'
+            scheme: 'VISA'
+            expirationMonth: '10'
+            expirationYear: '30'
+
+    ProvisionTokenResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2021-06-20T23:42:48Z'
+            apiTraceId: '362866ac81864d7c9d1ff8b5aa6e98db'
+            clientRequestId: '30dd879c-ee2f-11db-8314-0800200c9a66'
+            transactionId: '362866ac81864d7c9d1ff8b5aa6e98db'
+        paymentTokens:
+          tokenRequestorId: 'AAA008UU'
+          tokenData: '4895370015665612'
+          paymentAccountReferenceId: 'V0010013021172823274978766290'
+          expirationMonth: '10'
+          expirationYear: '30'
+          tokenSource: 'VISA'
+          provisionTokenId: 'a6a4f07c2777f450ce451a0f747a8f02'
+        card:
+          last4: '9678'
+          bin: "40055500"
+          expirationMonth: '10'
+          expirationYear: '2030'
+          scheme: 'VISA'
+
+    ProvisionTAResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2021-06-20T23:42:48Z'
+            apiTraceId: '362866ac81864d7c9d1ff8b5aa6e98db'
+            clientRequestId: '30dd879c-ee2f-11db-8314-0800200c9a66'
+            transactionId: '362866ac81864d7c9d1ff8b5aa6e98db'
+        paymentTokens:
+          tokenData: '4895370015665612'
+          tokenSource: 'TRANSARMOR'
+        card:
+          last4: '9678'
+          bin: "40055500"
+          expirationMonth: '10'
+          expirationYear: '2030'
+          scheme: 'VISA'
+
+    TransactRequest:
+      value:
+        transact:
+          transactionType: 'ECOM'
+          scheme: 'VISA'
+
+    TransactResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2021-06-20T23:42:48Z'
+            apiTraceId: '362866ac81864d7c9d1ff8b5aa6e98db'
+            clientRequestId: '30dd879c-ee2f-11db-8314-0800200c9a66'
+        paymentTokens:
+          tokenRequestorId: '50175692476'
+          tokenData: '5204736200176909'
+          tokenSource: 'VISA'
+          paymentAccountReferenceId: 'V0010013021015339622318943186'
+          expirationMonth: '10'
+          expirationYear: '30'
+          provisionTokenId: '46d233d2780ba4480c1f1e6abd4f7002'
+        transact:
+          eci: '123'
+          panSequenceNumber: '00'
+          track2Equivalent: '5204736200176909D25041000000000000000F'
+          cryptogram: 'ABpQmfNkuzAqAAKxV1JzAAADFA=='
+          scheme: 'VISA'
+
+    StatusResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2021-06-20T23:42:48Z'
+            apiTraceId: '362866ac81864d7c9d1ff8b5aa6e98db'
+            clientRequestId: '30dd879c-ee2f-11db-8314-0800200c9a66'
+        paymentTokens:
+          tokenReferenceId: 'DNITHE302214550865262804'
+          decision: 'ACTIVE'
+          tokenSource: 'VISA'
+
+    TokenLookupResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2022-10-16T20:30:50.828Z'
+            apiTraceId: 'da19bd3663724d90a103b4371b14a090'
+            clientRequestId: '2dcdb755-2d54-4107-aab9-04e7ee088d05'
+        paymentTokens:
+          tokenRequestorId: 'AAA008UU'
+          tokenData: '4895370015665612'
+          paymentAccountReferenceId: 'V0010013021172823274978766290'
+          expirationMonth: '10'
+          expirationYear: '30'
+          tokenSource: 'VISA'
+          provisionTokenId: 'a6a4f07c2777f450ce451a0f747a8f02'
+        card:
+          last4: '9678'
+          bin: "40055500"
+          expirationMonth: '10'
+          expirationYear: '2030'
+          scheme: 'VISA'
+
+    TokenAssetResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2022-10-16T20:30:50.828Z'
+            apiTraceId: 'ba6cd5305f314514b5dea5e5b4b22580'
+            clientRequestId: '59a39056-b758-4f5a-a112-e23c3e145125'
+        media:
+          altText: 'Front_Image'
+          contentType: 'cardSymbol'
+          mimeType: 'image/png'
+          width: '200'
+          height: '200'
+          encodedData: 'R0l...aP='
+
+    EventResponse:
+      value:
+        gatewayResponse:
+          transactionProcessingDetails:
+            transactionTimestamp: '2022-10-16T20:30:50.828Z'
+            apiTraceId: 'ba6cd5305f314514b5dea5e5b4b22580'
+            clientRequestId: '59a39056-b758-4f5a-a112-e23c3e145125'
+        eventype: 'TOKEN_UPDATE_EVENT'
+        paymentTokens:
+          tokenRequestorId: 'AAA008UU'
+          tokenData: '4895370015665612'
+          paymentAccountReferenceId: 'V0010013021172823274978766290'
+          expirationMonth: '10'
+          expirationYear: '30'
+          tokenSource: 'VISA'
+          provisionTokenId: 'a6a4f07c2777f450ce451a0f747a8f02'
+        card:
+          last4: '9678'
+          bin: "40055500"
+          expirationMonth: '10'
+          expirationYear: '2030'
+          scheme: 'VISA'
+
     TokenizationMockResponse:
       value:
         provision:
@@ -1108,3 +1560,4 @@ components:
 
     NoContent:
       value:
+
