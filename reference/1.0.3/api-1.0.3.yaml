@@ -18,6 +18,8 @@ paths:
     post:
       tags:
         - ProvisionToken
+      x-group-name: Network Tokens
+      x-proxy-name: Tokenization
       description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
@@ -114,6 +116,8 @@ paths:
     get:
       tags:
         - Get Token Status
+      x-group-name: Network Tokens
+      x-proxy-name: Network Tokenization Status
       description: This API will return the current provisioning status of a Network Token. Provisioning requests are immediately followed by web hook notifications. This API can be used additionally to request the provisioning status.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -209,6 +213,8 @@ paths:
     post:
       tags:
         - Push Notification
+      x-group-name: Network Tokens
+      x-proxy-name: Event notification
       description: This API will push Token updates to the client received from card schemes through Fiserv. The Update contains Token Lifecycle event notification or Provisioned Token event notification details.
       parameters:
         - in: header
@@ -308,6 +314,8 @@ paths:
     patch:
       tags:
         - Merchant Token Lifecycle Management
+      x-group-name: Network Tokens
+      x-proxy-name: TokenState
       description: This API will change the status of the token as requested by the merchant to the card schemes through Fiserv. Token status change inlcudes ACTIVE, SUSPEND and UNSUSPEND.
       parameters:
         - in: header
@@ -507,8 +515,9 @@ paths:
 
   /network-tokens/v1/tokens/{tokenReferenceId}/cryptogram:
     post:
-      tags:
-        - Get Cryptogram
+      tags: [ Cryptogram ]
+      x-group-name: Network Tokens
+      x-proxy-name: Cryptogram
       description: This API will return single use cryptogram to be used by client in Network Token consumer initiated transaction (CIT)).
       parameters:
         - in: header
