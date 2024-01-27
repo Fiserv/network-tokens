@@ -419,6 +419,8 @@ paths:
     get:
       tags:
         - Get Token Details
+      x-group-name: Network Tokens
+      x-proxy-name: TokenDetail
       description: This API will return the status and details for a tokenReferenceId. It can be used to check current token state or in exception scenarios (such as network time out) to ensure that external systems remain in sync with the Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -515,7 +517,8 @@ paths:
 
   /network-tokens/v1/tokens/{tokenReferenceId}/cryptogram:
     post:
-      tags: [ Cryptogram ]
+      tags:
+        - Get Cryptogram
       x-group-name: Network Tokens
       x-proxy-name: Cryptogram
       description: This API will return single use cryptogram to be used by client in Network Token consumer initiated transaction (CIT)).
@@ -625,6 +628,8 @@ paths:
     get:
       tags:
         - Get Card Art
+      x-group-name: Network Tokens
+      x-proxy-name: Card Art details
       description: This API will return the digital art asset associated with the token using assetId.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -723,6 +728,8 @@ paths:
     get:
       tags:
         - Get PAN
+      x-group-name: Network Tokens
+      x-proxy-name: Get PAN Details
       description: This API will return the encrypted PAN details associated with Network Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
