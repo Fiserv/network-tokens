@@ -1,7 +1,6 @@
 #######################################################################
 ## Added X-Card-Brand header to all the APIs to route the request to the right adapter.
 ## Removed tokenReferenceId from Asset API. It's not required by Token Provider.
-## Added Public keye nec API.
 #######################################################################
 openapi: 3.0.0
 info:
@@ -421,7 +420,7 @@ paths:
       tags:
         - Token Details
       x-group-name: Network Tokens
-      x-proxy-name: Token Details
+      x-proxy-name: Token Detail
       description: This API will return the status and details for a tokenReferenceId. It can be used to check current token state or in exception scenarios (such as network time out) to ensure that external systems remain in sync with the Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -831,7 +830,7 @@ paths:
         - Encryption Key
       x-group-name: Network Tokens
       x-proxy-name: Encryption Key
-      description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      description: This API will provision a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
           name: X-Card-Brand
