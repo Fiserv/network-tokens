@@ -17,9 +17,9 @@ paths:
   /network-tokens/v1/tokens:
     post:
       tags:
-        - ProvisionToken
+        - Provision Token
       x-group-name: Network Tokens
-      x-proxy-name: Tokenization
+      x-proxy-name: Provision Token
       description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
