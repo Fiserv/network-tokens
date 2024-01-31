@@ -1,10 +1,11 @@
 #######################################################################
 ## Added X-Card-Brand header to all the APIs to route the request to the right adapter.
 ## Removed tokenReferenceId from Asset API. It's not required by Token Provider.
+## Added Public Key API.
 #######################################################################
 openapi: 3.0.0
 info:
-  version: 1.0.3
+  version: 1.0.4
   title: Network Supported APIs
   description: This Specification document lists the APIs for Token Provision and its Lifecycle Management.
 
@@ -17,10 +18,10 @@ paths:
   /network-tokens/v1/tokens:
     post:
       tags:
-        - ProvisionToken
+        - Provision Token
       x-group-name: Network Tokens
-      x-proxy-name: Tokenization
-      description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      x-proxy-name: Provision Token
+      description: This API will provision a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
           name: X-Card-Brand
@@ -115,9 +116,7 @@ paths:
   /network-tokens/v1/tokens/{provisionRequestId}/status:
     get:
       tags:
-        - Get Token Status
-      x-group-name: Network Tokens
-      x-proxy-name: Network Tokenization Status
+        - Token Status
       description: This API will return the current provisioning status of a Network Token. Provisioning requests are immediately followed by web hook notifications. This API can be used additionally to request the provisioning status.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -213,8 +212,6 @@ paths:
     post:
       tags:
         - Push Notification
-      x-group-name: Network Tokens
-      x-proxy-name: Event notification
       description: This API will push Token updates to the client received from card schemes through Fiserv. The Update contains Token Lifecycle event notification or Provisioned Token event notification details.
       parameters:
         - in: header
@@ -313,9 +310,7 @@ paths:
   /network-tokens/v1/tokens/{tokenReferenceId}:
     patch:
       tags:
-        - Merchant Token Lifecycle Management
-      x-group-name: Network Tokens
-      x-proxy-name: TokenState
+        - Token Lifecycle
       description: This API will change the status of the token as requested by the merchant to the card schemes through Fiserv. Token status change inlcudes ACTIVE, SUSPEND and UNSUSPEND.
       parameters:
         - in: header
@@ -418,9 +413,7 @@ paths:
 
     get:
       tags:
-        - Get Token Details
-      x-group-name: Network Tokens
-      x-proxy-name: TokenDetail
+        - Token Details
       description: This API will return the status and details for a tokenReferenceId. It can be used to check current token state or in exception scenarios (such as network time out) to ensure that external systems remain in sync with the Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -518,9 +511,7 @@ paths:
   /network-tokens/v1/tokens/{tokenReferenceId}/cryptogram:
     post:
       tags:
-        - Get Cryptogram
-      x-group-name: Network Tokens
-      x-proxy-name: Cryptogram
+        - Cryptogram
       description: This API will return single use cryptogram to be used by client in Network Token consumer initiated transaction (CIT)).
       parameters:
         - in: header
@@ -627,9 +618,7 @@ paths:
   /network-tokens/v1/tokens/assets/{assetId}:
     get:
       tags:
-        - Get Card Art
-      x-group-name: Network Tokens
-      x-proxy-name: Card Art details
+        - Card Art
       description: This API will return the digital art asset associated with the token using assetId.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -727,9 +716,7 @@ paths:
   /network-tokens/v1/tokens/{tokenReferenceId}/card:
     get:
       tags:
-        - Get PAN
-      x-group-name: Network Tokens
-      x-proxy-name: Get PAN Details
+        - PAN
       description: This API will return the encrypted PAN details associated with Network Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -824,11 +811,103 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /network-tokens/v1/tokens/keys:
+    get:
+      tags:
+        - Encryption Key
+      description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      parameters:
+        - in: header
+          name: X-Card-Brand
+          description: Card brand possible values are VI, MC, DI, AX
+          required: true
+          schema:
+            $ref: '#/components/schemas/CardBrand'
+        - in: header
+          name: Client-Request-Id
+          description: Contains a unique ID generated by the client that can be used for enforcing idempotency on POST actions. POSTs are inherently non-idempotent and submitting the exact same request multiple times would create duplicate resources.
+            Note:- Omitting this header increases the risk of duplicate transactions.
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Timestamp
+          description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          description: Authorization information for the request. Format- `HMAC {hmacToken}`
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '201':
+          description: provision response - Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysResponse'
+              examples:
+                ProvisionQueueResponse:
+                  $ref: '#/components/examples/KeysResponse'
+
+        '400':
+          description: provision response - Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: provision response - Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '408':
+          description: provision response - Request timeout error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: provision response - Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: provision response - Bad Gateway Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: provision response - Service Unavailable error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: provision response - Gateway Timeout error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     ##-------------------------------------
     ## Response Model
     ##-------------------------------------
+    KeysResponse:
+      title: Provides base64 encoded public key for PCI data encryption
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Keys'
+
     ProvisionQueueStatusResponse:
       title: Provides tokenization status
       type: object
@@ -855,6 +934,33 @@ components:
       properties:
         notification:
           $ref: '#/components/schemas/Notification'
+
+    Keys:
+      description: Keys response structure
+      type: object
+      required:
+        - keyId
+        - status
+        - expireDate
+        - publicKey
+      properties:
+        keyId:
+          description: Id associated with key pair.
+          type: string
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        status:
+          description: Status of the Key pair.
+          type: string
+          example: "ACTIVE, INACTIVE, EXPIRED"
+        expireDate:
+          description: Expire date of the Key pair.
+          type: string
+          example: "2024-02-01T10:46:14.087458148"
+        publicKey:
+          description: Base64 encoded public key for PCI data encryption.
+          type: string
+          example: "base64_enc_string"
+
 
     Notification:
       description: Notification request structure
@@ -1523,6 +1629,7 @@ components:
         - TOKENIZATION_INPROGRESS
         - TOKENIZATION_COMPLETED
         - TOKENIZATION_ERROR
+        - DUPLICATE_REQUEST
     #-------------------------------------
     # response Models
     #-------------------------------------
@@ -1694,3 +1801,10 @@ components:
       value:
         status: "TOKENIZATION_COMPLETED"
         tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
+
+    KeysResponse:
+      value:
+        keyId: 0356161b-74f2-4378-90c6-9267ac3e4f20
+        status: ACTIVE
+        expireDate: '2024-02-01T10:46:14.087458148'
+        publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkQgpdsPDqkYxyQ92tCUnPviR6OOkIyBVtDrXu8VexYIXEx4g0HaVfFUPnNfPpnfBqg8X5HTwGm/cP5MVDr6kPtnuaFsXH9i7dIRRDpLedI7kH6L4Uts7BBHPeBgcEWY7Ns19td9P8XtKZZVBo3zp+u32O3mOQhDjIJYJWBTLotQiAL47E69LW3Zhb6jETbnTj9AMyNc0GoCm5GZ29J9NX4YyEZcLF7ZyDdENp7Q9Fh2uu1mw3LOYu7WgAIpjp36prfI4YOrChXeWgh2XIClJqHgmefhpjBgRYS0diFFLhwooij+moAHwlq7bXs/jdM3bQ8WdH7OLYptBKQ+6/fqR1QIDAQAB
