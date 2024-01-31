@@ -21,9 +21,15 @@
   "apiVersions": [
       {
         "version": "1.0.3",
-        "versionType": "major",
+        "versionType": "minor",
         "releaseNotesPath": "/release-notes/release-notes-1.0.0.md",
         "apiSpecFileNames": ["api-1.0.3"]
+      },
+      {
+        "version": "1.0.4",
+        "versionType": "major",
+        "releaseNotesPath": "/release-notes/release-notes-1.0.0.md",
+        "apiSpecFileNames": ["api-1.0.4"]
       }
   ],
   "product": {
