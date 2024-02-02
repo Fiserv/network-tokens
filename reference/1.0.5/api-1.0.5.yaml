@@ -1,8 +1,6 @@
 #######################################################################
 ## Added X-Card-Brand header to all the APIs to route the request to the right adapter.
 ## Removed tokenReferenceId from Asset API. It's not required by Token Provider.
-## Added Public keye nec API.
-## Added a new eventype for PAN Data notification as part of CAU process.
 #######################################################################
 openapi: 3.0.0
 info:
