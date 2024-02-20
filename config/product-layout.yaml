@@ -29,42 +29,31 @@
 ################################################################################
 header:
   productName: Network Tokens
-  productionDescription: REPLACEME
-  whoIsItFor: REPLACEME
+  productionDescription: Network Tokens services are provided by the Card Networks in lieu of the cardholder’s PAN, Also known as EMVCo Tokens or Payment Tokens.Network Tokens move through the payment networks in the same way as a PAN, allowing transactions to occur without the merchant being exposed to the underlying PAN. It can be used for credential on file payments (CNP)
+  whoIsItFor: Netwrok Tokens provides better Auth/Sale transaction compared to traditioanl PAN based transaction and provdes ehnanced security overall.
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
     altText: REPLACEME™
+getStarted: /docs/getting-started.md
 featuredFeatures:
-  - title: REPLACE ME
-    description:  REPLACE ME
-    tags: ["REPLACEME", "REPLACEME", "REPLACEME"]
-    bullets: ["REPLACEME", "REPLACEME" ]  
+  - title: Network Tokens
+    description:  Network Tokens Services for COF tokenization.
+    tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
+    bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME1.md
+        title: aSynchTokenization
+        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: ./docs/asynchTokenization.md
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME2.md
+        title: Tokenization
+        description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: ./docs/synchTokenization.md
       - relatedDoc: 
-        title: REPLACEME
-        description: REPLACEME
-        link: ./docs/REPLACE-ME3.md
-    relatedAPIs:
-      - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
-        type: "patch"        
-        path: "/v1/REPLACEME1"
-      - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
-        type: "post"        
-        path: "/v1/REPLACEME2"
-      - relatedAPI: 
-        title: REPLACEME
-        description: REPLACEME
-        type: "get"        
-        path: "/v1/REPLACEME3"
+        title: Lifecycle
+        description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
+        link: ./docs/merchantlcm.md
+      - relatedDoc:
+        title: Cryptogram
+        description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
+        link: ./docs/cryptogram.md
