@@ -1,13 +1,10 @@
 #######################################################################
 ## Added X-Card-Brand header to all the APIs to route the request to the right adapter.
 ## Removed tokenReferenceId from Asset API. It's not required by Token Provider.
-## Added Public keye nec API.
-## Added a new eventype for PAN Data notification as part of CAU process.
-## Added token object in Card API.
 #######################################################################
 openapi: 3.0.0
 info:
-  version: 1.0.6
+  version: 1.0.5
   title: Network Supported APIs
   description: This Specification document lists the APIs for Token Provision and its Lifecycle Management.
 
@@ -776,10 +773,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetPanResposne'
               examples:
-                GetPanWithPan:
+                GetPan:
                   $ref: '#/components/examples/GetPanResposne'
-                GetPANWithNoPan:
-                  $ref: '#/components/examples/GetPANWithNoPan'
         '400':
           description: provision response - Bad request
           content:
@@ -941,8 +936,6 @@ components:
       properties:
         card:
           $ref: '#/components/schemas/Card'
-        token:
-          $ref: '#/components/schemas/Token'
         status:
           $ref: '#/components/schemas/Status'
         cardBrand:
@@ -1806,17 +1799,8 @@ components:
           expiryDate:
             month: 'mm'
             year: 'yy'
-        token:
-          tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
         cardBrand: VI
         status: "CARD_UPDATE_INPROGRESS"
-
-    GetPANWithNoPan:
-      value:
-        token:
-          tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
-        cardBrand: VI
-        status: "CARD_UP_TO_DATE"
 
     ProvisionQueueStatusInProgressResponse:
       value:
