@@ -1,4 +1,3 @@
-# Tokenization
 
 ## Network Tokenization Overview
 
