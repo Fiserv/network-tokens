@@ -33,7 +33,7 @@ header:
   whoIsItFor: Netwrok Tokens provides better Auth/Sale transaction compared to traditioanl PAN based transaction and provdes ehnanced security overall.
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
-    altText: REPLACEME™
+    altText: Fiserv™
 getStarted: /docs/getting-started.md
 featuredFeatures:
   - title: Network Tokens
@@ -42,9 +42,9 @@ featuredFeatures:
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
       - relatedDoc: 
-        title: aSynchTokenization
+        title: Tokenization Introduction
         description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
-        link: ./docs/asynchTokenization.md
+        link: /docs/interactive-guide/description.md
       - relatedDoc: 
         title: Tokenization
         description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
