@@ -833,7 +833,7 @@ paths:
         - Encryption Key
       x-group-name: Network Tokens
       x-proxy-name: Encryption Key
-      description: This API will provision a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      description: This API will provide public key to encrypt payload content by the merchant for PAN to Network Token.
       parameters:
         - in: header
           name: X-Card-Brand
