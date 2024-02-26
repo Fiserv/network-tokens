@@ -253,13 +253,13 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/NotificationRequest'
-                - $ref: '#/components/schemas/ErrorRequest'
+              - $ref: '#/components/schemas/NotificationRequest'
+
             examples:
               Notification:
                 $ref: '#/components/examples/Notification'
-
+              Error:
+                $ref: '#/components/examples/ErrorRequest'
 
       responses:
         '201':
