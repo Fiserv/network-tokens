@@ -253,8 +253,7 @@ paths:
         content:
           application/json:
             schema:
-              - $ref: '#/components/schemas/NotificationRequest'
-
+              $ref: '#/components/schemas/NotificationRequest'
             examples:
               LifeCycleNotification:
                 $ref: '#/components/examples/LifeCycleNotificationRequest'
