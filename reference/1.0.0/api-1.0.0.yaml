@@ -760,12 +760,7 @@ paths:
           required: true
           schema:
             type: string
-        - in: header
-          name: X-Key-Id
-          description: Reference key for Public and private key pair created using Encryption Key API.
-          required: true
-          schema:
-            type: string
+
         - in: path
           name: tokenReferenceId
           description: The tokenReferenceId provided in response of /provision-tokens API.
