@@ -256,10 +256,12 @@ paths:
               - $ref: '#/components/schemas/NotificationRequest'
 
             examples:
-              Notification:
-                $ref: '#/components/examples/Notification'
-              Error:
-                $ref: '#/components/examples/ErrorRequest'
+              LifeCycleNotification:
+                $ref: '#/components/examples/LifeCycleNotificationRequest'
+              ProvisionNotification:
+                $ref: '#/components/examples/ProvisionNotificationRequest'
+              ErrorNotification:
+                $ref: '#/components/examples/ErrorNotificationRequest'
 
       responses:
         '201':
@@ -953,9 +955,7 @@ components:
         - notification
       properties:
         notification:
-          description: Encrypted notification payload. look for Notification object for details.
-          type: string
-          example: "ENC_NOTIFICATION_PAYLOAD"
+          $ref: '#/components/schemas/Notification'
 
     Notification:
       description: Notification request structure outbound to merchant using webhook.
@@ -1735,9 +1735,6 @@ components:
           height: '283'
           width: '458'
 
-    Notification:
-      value:
-        notification: ENC_NOTIFICATION_PAYLOAD
 
     LifeCycleNotificationRequest:
       value:
@@ -1778,8 +1775,8 @@ components:
             alias: '3731'
             tokenRequestorId: 'trid_string'
             fiservTokenRequestorId: AAA001XX
-            paymentToken: 'payment_token_string'
-            paymentAccountReferenceId: V0010013021015339508878152888
+            paymentToken: 'enc_payment_token_string'
+            paymentAccountReferenceId: 'enc_par_string'
             tokenStatus: ACTIVE
             provisionTokenId: 69dc97d4555dd16ad8041cb8fc4eea01
           transactionInfo:
@@ -1787,7 +1784,7 @@ components:
             provisionRequestId: 8a7fc6c98cef0334018cef50c3480001
           eventType: PROVISION_TOKEN_EVENT
 
-    ErrorRequest:
+    ErrorNotificationRequest:
       value:
         error:
           code: '400002'
