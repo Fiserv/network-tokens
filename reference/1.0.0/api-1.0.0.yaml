@@ -774,7 +774,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/'GetCardResponse
+                $ref: '#/components/schemas/GetCardResponse'
               examples:
                 GetPanWithPan:
                   $ref: '#/components/examples/GetCardResponse'
@@ -1318,6 +1318,7 @@ components:
           properties:
             tokenReferenceId:
               description: Token reference id for stored token which is used to retrieve Card details
+              type: string
               example: "8a7f87f68cef0334018cef506da80002"
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
