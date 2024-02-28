@@ -731,8 +731,8 @@ paths:
       tags:
         - PAN
       x-group-name: Network Tokens
-      x-proxy-name: PAN Details
-      description: This API will return the encrypted PAN details associated with Network Token.
+      x-proxy-name: Get Card
+      description: This API will return the encrypted Card details associated with Network Token.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
         - in: header
@@ -760,6 +760,7 @@ paths:
           required: true
           schema:
             type: string
+
         - in: path
           name: tokenReferenceId
           description: The tokenReferenceId provided in response of /provision-tokens API.
@@ -769,16 +770,16 @@ paths:
 
       responses:
         '200':
-          description: provision response - Success
+          description: Get Card Response - Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetPanResposne'
+                $ref: '#/components/schemas/GetCardResponse'
               examples:
                 GetPanWithPan:
-                  $ref: '#/components/examples/GetPanResposne'
+                  $ref: '#/components/examples/GetCardResponse'
                 GetPANWithNoPan:
-                  $ref: '#/components/examples/GetPANWithNoPan'
+                  $ref: '#/components/examples/GetCardResponseNoCardInfo'
         '400':
           description: provision response - Bad request
           content:
@@ -1297,7 +1298,30 @@ components:
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 36
-
+    GetCardResponse:
+      description: Tokenized card details
+      type: object
+      properties:
+        card:
+          description: Card information
+          type: object
+          properties:
+            cardNumber:
+              description: Base 64 encoded encrypted card number. Use private key to decrypt card number
+              type: string
+              example: "base64_encoded_enc_pan_string"
+            expiryDate:
+              $ref: '#/components/schemas/ExpiryDate'
+        token:
+          description: Token details
+          type: object
+          properties:
+            tokenReferenceId:
+              description: Token reference id for stored token which is used to retrieve Card details
+        cardBrand:
+          $ref: '#/components/schemas/CardBrand'
+        status:
+          $ref: '#/components/schemas/Status'
     Card:
       description: Card account Information.
       type: object
@@ -1799,10 +1823,10 @@ components:
           provisionRequestId: 8a7f87f68cef0334018cef506da80002
         eventType: PROVISION_TOKEN_EVENT
 
-    GetPanResposne:
+    GetCardResponse:
       value:
         card:
-          cardNumber: 'enc_pan_string'
+          cardNumber: 'base64_encoded_enc_pan_string'
           expiryDate:
             month: 'mm'
             year: 'yy'
@@ -1811,7 +1835,7 @@ components:
         cardBrand: VI
         status: "CARD_UPDATE_INPROGRESS"
 
-    GetPANWithNoPan:
+    GetCardResponseNoCardInfo:
       value:
         token:
           tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
