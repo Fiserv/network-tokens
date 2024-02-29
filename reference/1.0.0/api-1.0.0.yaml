@@ -119,9 +119,9 @@ paths:
   /network-tokens/v1/tokens/{provisionRequestId}/status:
     get:
       tags:
-        - Token Status
+        - Provision Token Status
       x-group-name: Network Tokens
-      x-proxy-name: Token Status
+      x-proxy-name: Provision Token Status
       description: This API will return the current provisioning status of a Network Token. Provisioning requests are immediately followed by web hook notifications. This API can be used additionally to request the provisioning status.
         <b>This API is rate limited and may start returning http 429 status if overused.</b>
       parameters:
@@ -317,7 +317,7 @@ paths:
       tags:
         - Token Lifecycle
       x-group-name: Network Tokens
-      x-proxy-name: Token State
+      x-proxy-name: Token Lifecycle
       description: This API will change the status of the token as requested by the merchant to the card schemes through Fiserv. Token status change inlcudes ACTIVE, SUSPEND and UNSUSPEND.
       parameters:
         - in: header
@@ -353,7 +353,7 @@ paths:
             type: string
 
       requestBody:
-        description: Details required for provision a PAN data.
+        description: Details required to manage token lifecycle.
         required: true
         content:
           application/json:
@@ -934,7 +934,12 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/Status'
-
+        tokenReferenceId:
+          description: Token reference id for stored token which is used to retrieve Card details
+          type: string
+          example: "8a7f87f68cef0334018cef506da80002"
+        tspName:
+          $ref: '#/components/schemas/CardBrand'
     GetPanResposne:
       title: Provides the encrypted pan.
       type: object
@@ -1093,10 +1098,11 @@ components:
           $ref: '#/components/schemas/UpdateReason'
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
-        merchantInfo:
-          $ref: '#/components/schemas/MerchantInfo'
-        customerInfo:
-          $ref: '#/components/schemas/CustomerInfo'
+        locale:
+          description: locale code for country language
+          type: string
+          example: en_US
+
 
     ProvisionQueueResponse:
       title: Provision response object model
@@ -1495,7 +1501,6 @@ components:
           description: Free form reason why the Tokens are being suspended.
           type: string
           example: "Lost/stolen device"
-          writeOnly: true
 
     MediaContents:
       description: Provision card information.
@@ -1598,7 +1603,6 @@ components:
     Operation:
       description: Indicates the type of operation to be performed. Applicable values are defined below.
       type: string
-      writeOnly: true
       enum:
         - SUSPEND
         - RESUME
