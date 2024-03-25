@@ -5,10 +5,11 @@
 ## Added a new eventype for PAN Data notification as part of CAU process.
 ## Added token object in Card API.
 ## Update in notification payload. Encryption added as part of notificaiton.
+## Message attribute if real time CAU fails.
 #######################################################################
 openapi: 3.0.0
 info:
-  version: 1.0.7
+  version: 1.0.8
   title: Network Supported APIs
   description: This Specification document lists the APIs for Token Provision and its Lifecycle Management.
 
@@ -261,6 +262,10 @@ paths:
                 $ref: '#/components/examples/ProvisionNotificationRequest'
               ErrorNotification:
                 $ref: '#/components/examples/ErrorNotificationRequest'
+              PanUpdateNotification:
+                $ref: '#/components/examples/PanUpdateNotification'
+              PanUpdateNotificationError:
+                $ref: '#/components/examples/PanUpdateNotificationError'
 
       responses:
         '201':
@@ -760,7 +765,6 @@ paths:
           required: true
           schema:
             type: string
-
         - in: path
           name: tokenReferenceId
           description: The tokenReferenceId provided in response of /provision-tokens API.
@@ -780,6 +784,8 @@ paths:
                   $ref: '#/components/examples/GetCardResponse'
                 GetPANWithNoPan:
                   $ref: '#/components/examples/GetCardResponseNoCardInfo'
+                GetPanResponseError:
+                  $ref: '#/components/examples/GetPanResponseError'
         '400':
           description: provision response - Bad request
           content:
@@ -1098,11 +1104,10 @@ components:
           $ref: '#/components/schemas/UpdateReason'
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
-        locale:
-          description: locale code for country language
-          type: string
-          example: en_US
-
+        merchantInfo:
+          $ref: '#/components/schemas/MerchantInfo'
+        customerInfo:
+          $ref: '#/components/schemas/CustomerInfo'
 
     ProvisionQueueResponse:
       title: Provision response object model
@@ -1829,6 +1834,17 @@ components:
           provisionRequestId: 8a7f87f68cef0334018cef506da80002
         eventType: PROVISION_TOKEN_EVENT
 
+    PanUpdateNotification:
+      value:
+        eventType: PAN_UPDATE_EVENT
+        tokenReferenceId: DNITHE302210369115657551
+
+    PanUpdateNotificationError:
+      value:
+        eventType: PAN_UPDATE_EVENT
+        tokenReferenceId: DNITHE302210369115657551
+        message: "PAN update error."
+
     GetCardResponse:
       value:
         card:
@@ -1840,6 +1856,14 @@ components:
           tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
         cardBrand: VI
         status: "CARD_UPDATE_INPROGRESS"
+
+    GetPanResponseError:
+      value:
+        token:
+          tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
+        cardBrand: VI
+        status: "CARD_UPDATE_ERROR"
+        message: "PAN update error."
 
     GetCardResponseNoCardInfo:
       value:
