@@ -1104,6 +1104,10 @@ components:
           $ref: '#/components/schemas/UpdateReason'
         cardBrand:
           $ref: '#/components/schemas/CardBrand'
+        locale:
+          description: locale code for country language
+          type: string
+          example: en_US
         merchantInfo:
           $ref: '#/components/schemas/MerchantInfo'
         customerInfo:
