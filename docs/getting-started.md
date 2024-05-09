@@ -11,7 +11,7 @@ Network Token direct APIs are available across multiple data/information produce
 <!-- type: row -->
 
 
-    <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon" title="Portal Icon" style="width: auto;height: 25%;max-height: 100px;"></div><div style="text-align:center;width:100%"> Payments Portal </div>
+    <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon" title="Portal Icon" style="width: auto;height: 25%;max-height: 100px;"></div>
     
 
 <!-- type: row-end -->
