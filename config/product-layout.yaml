@@ -43,7 +43,7 @@ benefits:
     description: With Network Tokens, consumers do not need to provide updated card data when PAN or expiration changes.
   - title: Lower interchange cost
     description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
-getStarted: /docs/getting-started_nt.md
+getStarted: /docs/getting-started.md
 featuredFeatures:
   - title: On-the-Go
     description: No code option- enable Network Tokens on MIDs PAN or TransArmorToken can be sent for authorization. Fiserv will provision Network Token and use when available for authorization. Fiserv managed Network Token vault.
