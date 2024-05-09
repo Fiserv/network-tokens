@@ -36,17 +36,17 @@ header:
     altText: Fiserv™
 benefits:
   - title: Higher authorization rates
-    description: Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle decline on CNP transactions.
+    description: Dynamically updated network tokens boost merchant authorization rates by averting lifecycle declines on card-not-present (CNP) transactions, resulting in an average 3% increase.
   - title: Enhanced payment security
-    description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.</br></br><b>Impact</b></br></br>Lower fraud risk for card-on-file transactions.
+    description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.
   - title: Seamless customer experience
-    description: With Network Tokens, consumers do not need to provide updated card data when PAN or expiration changes.</br></br><b>Impact</b></br></br>Seamless payment process as well as uninterrupted service or shopping experience.
+    description: With Network Tokens, consumers do not need to provide updated card data when PAN or expiration changes.
   - title: Lower interchange cost
-    description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.</br></br><b>Impact</b></br></br>9—10 bps lower interchange rate for qualifying Visa transactions.
+    description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
 getStarted: /docs/getting-started.md
 featuredFeatures:
   - title: On-the-Go
-    description:  <p><ul><li>No code option- enable Network Tokens on MIDs</li><li>PAN or TransArmorToken can be sent for authorization</li><li>Fiserv will provision Network Token and use when available for authorization</li><li>Fiserv managed Network Token vault.</li></ul></p>
+    description: No code option- enable Network Tokens on MIDs PAN or TransArmorToken can be sent for authorization. Fiserv will provision Network Token and use when available for authorization. Fiserv managed Network Token vault.
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
@@ -55,6 +55,6 @@ featuredFeatures:
         description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
         link: /docs/interactive-guide/description.md
   - title: Digital Wallet
-    description: <ul><li>Available through API calls and LCM push updates</li><li>Enhance digital wallets with card art</li><li>Ensure payment credentials are always current using LCM</li><li>Automatically detect outdated cards and seamlessly switch to Network tokens for authorization</li></ul>
+    description: Available through API calls and LCM push updates. Enhance digital wallets with card art. Ensure payment credentials are always current using LCM. Automatically detect outdated cards and seamlessly switch to Network tokens for authorization
   - title: Direct APIs
-    description: <ul><li>Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization.</li><li>Support processor-agnostic transactions using Network Tokens</li><li>Implement a merchant managed Network Token vault</li></ul>
+    description: Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization. Support processor-agnostic transactions using Network Tokens. Implement a merchant managed Network Token vault
