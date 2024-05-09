@@ -36,7 +36,7 @@ header:
     altText: Fiserv™
 benefits:
   - title: Higher authorization rates
-    description: Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle decline on CNP transactions.</br></br><b>Impact</b></br></br> More legitimate sales are converted to help drive immediate revenue.
+    description: Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle decline on CNP transactions.
   - title: Enhanced payment security
     description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.</br></br><b>Impact</b></br></br>Lower fraud risk for card-on-file transactions.
   - title: Seamless customer experience
@@ -46,7 +46,7 @@ benefits:
 getStarted: /docs/getting-started.md
 featuredFeatures:
   - title: On-the-Go
-    description:  <ul><li>No code option- enable Network Tokens on MIDs</li><li>PAN or TransArmorToken can be sent for authorization</li><li>Fiserv will provision Network Token and use when available for authorization</li><li>Fiserv managed Network Token vault</li></ul>.
+    description:  <p><ul><li>No code option- enable Network Tokens on MIDs</li><li>PAN or TransArmorToken can be sent for authorization</li><li>Fiserv will provision Network Token and use when available for authorization</li><li>Fiserv managed Network Token vault.</li></ul></p>
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:

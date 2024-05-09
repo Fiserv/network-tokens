@@ -1,4 +1,4 @@
-# Welcome to Network Tokens
+## Welcome to Network Tokens
 The Fiserv Network Tokens direct APIs are built on the foundation of REST. The APIs accept standard JSON requests and return JSON encoded responses while leveraging industry standard HTTP status codes for a seamless integration. Interaction through our Network Tokens direct APIs provides the developer community the ability to provision token, request cryptogram, retrieve card art and receive lifecycle updates in a seamless manner.
 - Provisioning through our APIs allows easy access to Network Tokens quickly because of Fiserv well built integration to major card networks
 - Request cryptogram to use along with Network Tokens for all your consumer initiated transactions as a processor agnostic model.
@@ -10,10 +10,10 @@ Network Token direct APIs are available across multiple data/information produce
 
 <!-- type: row -->
 
-<!-- type: card
-    title: <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon" title="Portal Icon" style="width: auto;height: 25%;max-height: 100px;"></div><div style="text-align:center;width:100%"> Payments Portal </div>
-    description: Network Token API flow
--->
+
+    <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon" title="Portal Icon" style="width: auto;height: 25%;max-height: 100px;"></div><div style="text-align:center;width:100%"> Payments Portal </div>
+    
+
 <!-- type: row-end -->
 
 ## Provision Token
