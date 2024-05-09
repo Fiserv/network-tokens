@@ -8,13 +8,12 @@ The Fiserv Network Tokens direct APIs are built on the foundation of REST. The A
 ## Overview
 Network Token direct APIs are available across multiple data/information produced by the set of services a merchant uses. The following diagram depicts typical flow of information through the processes. Our APIs provide you with the ability to pull or push information back to the merchant or the wallet provider.
 
-<!-- type: row -->
 
 
-    <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon" title="Portal Icon" style="width: auto;height: 25%;max-height: 100px;"></div>
+    <div style="text-align:center;width:100%;height:25%"><img src="https://raw.githubusercontent.com/Fiserv/network-tokens/develop/assets/images/nt-flow-diagram.png" alt="Portal Icon"  style="width: 100%;height: 100%;max-height: 100px;"></div>
     
 
-<!-- type: row-end -->
+
 
 ## Provision Token
 Provision token refers to the process of securing the sensitive payment information by provisioning a Network Token for a card with the network association and sending the same to the merchant. Tokens are provisioned asynchronously with the card schemes due to TPS limitations on the issuer end and are sent to the merchant as a push notification.
