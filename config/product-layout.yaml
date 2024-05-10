@@ -29,15 +29,15 @@
 ################################################################################
 header:
   productName: Network Tokens
-  productionDescription: Network Tokens services are provided by the Card Networks in lieu of the cardholder’s PAN, Also known as EMVCo Tokens or Payment Tokens.Network Tokens move through the payment networks in the same way as a PAN, allowing transactions to occur without the merchant being exposed to the underlying PAN. It can be used for credential on file payments (CNP)
+  productionDescription: <p align="justify"> Network Tokens, also known as EMVCo payment tokens, are provided by the Card Networks in lieu of the cardholder’s PAN for use in Card Not Present (CNP) transactions only. Merchant Network Tokens are provisioned for use in Credential-On-File (COF) payments and are distinct for every customer-merchant pairing. </br></br> Fiserv Network Tokens direct APIs allows the merchant the ability to provision tokens outside of the transaction flow and also request cryptogram to use in consumer-initiated transactions agnostic of the processor. By leveraging easy to use APIs, merchant can display card art within their digital wallet or mobile application, receive lifecycle updates thereby enhancing the customer experience and satisfaction.</p><p><b>Benefits of Network Tokens</b></br></br>Issuers recognize the inherent security features of Network Tokens, driving adoption and leading to a reduction in false declines.</p><p><b>Higher authorization rates</b>Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle decline on CNP transactions.</br></br><b>Impact</b></br></br> More legitimate sales are converted to help drive immediate revenue.</p><p><b>Enhanced payment security</b>Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.</br></br><b>Impact</b></br></br>Lower fraud risk for card-on-file transactions.</p><p><b>ESeamless customer experience</b>With Network Tokens, consumers do not need to provide updated card data when PAN or expiration changes.</br></br><b>Impact</b></br></br>Seamless payment process as well as uninterrupted service or shopping experience.</p><p><b>Lower interchange cost</b>Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.</br></br><b>Impact</b></br></br>9—10 bps lower interchange rate for qualifying Visa transactions.</p>
   whoIsItFor: Netwrok Tokens provides better Auth/Sale transaction compared to traditioanl PAN based transaction and provdes ehnanced security overall.
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
     altText: Fiserv™
 getStarted: /docs/getting-started.md
 featuredFeatures:
-  - title: Network Tokens
-    description:  Network Tokens Services for COF tokenization.
+  - title: On-the-Go
+    description: No code option- enable Network Tokens on MIDs PAN or TransArmorToken can be sent for authorization. Fiserv will provision Network Token and use when available for authorization. Fiserv managed Network Token vault.
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
     relatedDocs:
@@ -45,15 +45,7 @@ featuredFeatures:
         title: Tokenization Introduction
         description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
         link: /docs/interactive-guide/description.md
-      - relatedDoc: 
-        title: Tokenization
-        description: This API is to tokenize/provision a PAN data with issuer through different network engines like VISA, MASTERCARD, DISCOVER, AMEX.
-        link: ./docs/synchTokenization.md
-      - relatedDoc: 
-        title: Lifecycle
-        description: This API is to temporarily chnage the status of the token -  ACTIVE, SUSPEND, UNSUSPEND, DELETE are the lifecycle status.
-        link: ./docs/merchantlcm.md
-      - relatedDoc:
-        title: Cryptogram
-        description: This API is to create a Digital Secure Remote Payment transaction cryptogram using the credentials stored within netwrok to perfoem transaction.
-        link: ./docs/cryptogram.md
+  - title: Digital Wallet
+    description: Available through API calls and LCM push updates. Enhance digital wallets with card art. Ensure payment credentials are always current using LCM. Automatically detect outdated cards and seamlessly switch to Network tokens for authorization
+  - title: Direct APIs
+    description: Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization. Support processor-agnostic transactions using Network Tokens. Implement a merchant managed Network Token vault
