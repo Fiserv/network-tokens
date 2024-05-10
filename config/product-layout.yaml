@@ -34,15 +34,6 @@ header:
   image: 
     link: "/assets/images/Fiserv_Logo.jpg"
     altText: Fiserv™
-benefits:
-  - title: Higher authorization rates
-    description: Dynamically updated network tokens boost merchant authorization rates by averting lifecycle declines on card-not-present (CNP) transactions, resulting in an average 3% increase.
-  - title: Enhanced payment security
-    description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.
-  - title: Seamless customer experience
-    description: With Network Tokens, consumers do not need to provide updated card data when PAN or expiration changes.
-  - title: Lower interchange cost
-    description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
 getStarted: /docs/getting-started.md
 featuredFeatures:
   - title: On-the-Go
