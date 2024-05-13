@@ -40,19 +40,26 @@ benefits:
     description: Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle declines on CNP transactions.
   - title: Enhanced security
     description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.
-  - title: interchange savings
+  - title: Interchange savings
     description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
 featuredFeatures:
   - title: On-the-Go
     description: No code option- enable Network Tokens on MIDs PAN or TransArmorToken can be sent for authorization. Fiserv will provision Network Token and use when available for authorization. Fiserv managed Network Token vault.
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
-    relatedDocs:
-      - relatedDoc: 
-        title: Tokenization Introduction
-        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
-        link: /docs/interactive-guide/description.md
+
   - title: Digital Wallet
     description: Available through API calls and LCM push updates. Enhance digital wallets with card art. Ensure payment credentials are always current using LCM. Automatically detect outdated cards and seamlessly switch to Network tokens for authorization
+    relatedDocs:
+    - relatedDoc:
+       title: Digital Wallet
+       description: Network token digital Wallet.
+       link: /docs/getting-started.md
+
   - title: Direct APIs
     description: Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization. Support processor-agnostic transactions using Network Tokens. Implement a merchant managed Network Token vault
+    relatedDocs:
+      - relatedDoc:
+          title: Digital Wallet
+          description: Network token Direct APIs.
+          link: /docs/getting-started.md
