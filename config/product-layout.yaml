@@ -53,12 +53,12 @@ featuredFeatures:
     relatedDocs:
       - relatedDoc:
         title: Digital Wallet Introduction
-        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
-        link: /docs/interactive-guide/description.md
+        description: This API is to queue a provision token request for a PAN. It's async way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: /docs/interactive-guide/digital-wallet.md
   - title: Direct APIs
     description: Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization. Support processor-agnostic transactions using Network Tokens. Implement a merchant managed Network Token vault
     relatedDocs:
       - relatedDoc:
         title: Direct APIs Introduction
-        description: This API is to queue a provision token request for a PAN. It's asynch way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
-        link: /docs/interactive-guide/description.md
+        description: This API is to queue a provision token request for a PAN. It's async way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
+        link: /docs/interactive-guide/direct-api.md
