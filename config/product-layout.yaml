@@ -52,14 +52,19 @@ featuredFeatures:
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
 
   - title: Digital Wallet
-    description: Available through API calls and LCM push updates. Enhance digital wallets with card art. Ensure payment credentials are always current using LCM. Automatically detect outdated cards and seamlessly switch to Network tokens for authorization
+    description: • Available through API calls and LCM push updates.
+      • Enhance digital wallets with card art.
+      • Ensure payment credentials are always current using LCM.
+      • Automatically detect outdated cards and seamlessly switch to Network tokens for authorization
     relatedDocs:
       - relatedDoc:
         title: Digital Wallet Introduction
         description: This API is to queue a provision token request for a PAN. It's async way of tokenization the PAN through different networks like VISA, MASTERCARD, DISCOVER, AMEX.
         link: /docs/interactive-guide/digital-wallet.md
   - title: Direct APIs
-    description: Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization. Support processor-agnostic transactions using Network Tokens. Implement a merchant managed Network Token vault
+    description: • Allow for provisioning, cryptograms, and updated Network Token data to be obtain outside of the authorization.
+      • Support processor-agnostic transactions using Network Tokens.
+      • Implement a merchant managed Network Token vault
     relatedDocs:
       - relatedDoc:
         title: Direct APIs Introduction
