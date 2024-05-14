@@ -44,10 +44,10 @@ benefits:
     description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
 featuredFeatures:
   - title: On-the-Go
-    description: 1. No code option- enable Network Tokens on MIDs.
-      2. PAN or TransArmorToken can be sent for authorization.
-      3. Fiserv will provision Network Token and use when available for authorization.
-      4. Fiserv managed Network Token vault.
+    description: • No code option- enable Network Tokens on MIDs.
+      • PAN or TransArmorToken can be sent for authorization.
+      • Fiserv will provision Network Token and use when available for authorization.
+      • Fiserv managed Network Token vault.
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
 
