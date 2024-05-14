@@ -36,15 +36,15 @@ header:
     altText: Fiserv™
 getStarted: /docs/getting-started.md
 benefits:
-  - title: Uplift authorization
+  - title: Authorization Uplift
     description: Dynamically updated network tokens help merchants realize an average 3% authorization uptick due to prevention of lifecycle declines on CNP transactions.
-  - title: Enhanced security
+  - title: Enhanced Security
     description: Issuers perform Fraud Screening during provisioning, allowing for continued use of the Network Token after the underlying PAN is suspended.
-  - title: Interchange savings
+  - title: Interchange Savings
     description: Using network tokens can offer cost savings. Visa offers incentive rates for certain CNP consumer transactions that process with network tokens.
 featuredFeatures:
   - title: On-the-Go
-    description: No code option- enable Network Tokens on MIDs PAN or TransArmorToken can be sent for authorization. Fiserv will provision Network Token and use when available for authorization. Fiserv managed Network Token vault.
+    description: <p> 1. No code option- enable Network Tokens on MIDs. </br></br> 2. PAN or TransArmorToken can be sent for authorization. 3. Fiserv will provision Network Token and use when available for authorization. 4. Fiserv managed Network Token vault. </p>
     tags: ["aSynchTokenization", "Tokenization", "Lifecycle", "Cryptogram"]
     bullets: ["aSynchTokenization", "Tokenization" , "Lifecycle", "Cryptogram"]
 
