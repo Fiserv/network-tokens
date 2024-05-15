@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b253bc-3e1c-4dae-92b8-306639411494" name="Changes" comment="">
+    <list default="true" id="36b253bc-3e1c-4dae-92b8-306639411494" name="Changes" comment="Added specs for locale">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reference/1.0.0/api-1.0.0.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/reference/1.0.0/network-tokens.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/product-layout.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/product-layout.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/getting-started.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/getting-started.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/develop" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "prashantkumarfiserv"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Fiserv/network-tokens.git",
+    "accountId": "2f675cdf-36c6-4277-b0fe-1229418ed056"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="27RBKYHCeg0xgEGcMkibR8CIz1o" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -25,12 +52,13 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/reference/1.0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop__portal__launch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/reference/1.0.0" />
@@ -45,6 +73,95 @@
       <option name="presentableId" value="Default" />
       <updated>1649272965053</updated>
     </task>
+    <task id="LOCAL-00001" summary="Removed extra header">
+      <option name="closed" value="true" />
+      <created>1708648613445</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708648613445</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Schema for Notification request">
+      <option name="closed" value="true" />
+      <created>1708964033395</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708964033395</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed Push Notification schema">
+      <option name="closed" value="true" />
+      <created>1709046608713</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709046608713</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changed Push Notification schema">
+      <option name="closed" value="true" />
+      <created>1709047137201</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709047137201</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed response for Get Card API">
+      <option name="closed" value="true" />
+      <created>1709077147163</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709077147163</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Removed header for key reference">
+      <option name="closed" value="true" />
+      <created>1709077749426</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709077749426</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added token reference id">
+      <option name="closed" value="true" />
+      <created>1709138144601</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1709138144601</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added token reference id type">
+      <option name="closed" value="true" />
+      <created>1709140197507</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709140197507</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed issue with API specification data">
+      <option name="closed" value="true" />
+      <created>1709220946933</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709220946933</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added specs for CAU">
+      <option name="closed" value="true" />
+      <created>1711365047729</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711365047729</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added specs for locale">
+      <option name="closed" value="true" />
+      <created>1711991515562</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1711991515562</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -57,5 +174,18 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Removed extra header" />
+    <MESSAGE value="Added Schema for Notification request" />
+    <MESSAGE value="Changed Push Notification schema" />
+    <MESSAGE value="Fixed response for Get Card API" />
+    <MESSAGE value="Removed header for key reference" />
+    <MESSAGE value="Added token reference id" />
+    <MESSAGE value="Added token reference id type" />
+    <MESSAGE value="Fixed issue with API specification data" />
+    <MESSAGE value="Added specs for CAU" />
+    <MESSAGE value="Added specs for locale" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added specs for locale" />
   </component>
 </project>
