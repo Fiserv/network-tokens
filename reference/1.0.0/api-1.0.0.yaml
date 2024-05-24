@@ -47,6 +47,12 @@ paths:
           schema:
             type: string
         - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
+          required: true
+          schema:
+            type: string
+        - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
           required: true
@@ -146,6 +152,12 @@ paths:
           schema:
             type: string
         - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
+          required: true
+          schema:
+            type: string
+        - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
           required: true
@@ -238,6 +250,12 @@ paths:
         - in: header
           name: Timestamp
           description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
           required: true
           schema:
             type: string
@@ -341,6 +359,12 @@ paths:
         - in: header
           name: Timestamp
           description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
           required: true
           schema:
             type: string
@@ -451,11 +475,18 @@ paths:
           schema:
             type: string
         - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
+          required: true
+          schema:
+            type: string
+        - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
           required: true
           schema:
             type: string
+
         - in: path
           name: tokenReferenceId
           description: The tokenReferenceId provided in response of /provision-tokens API. In Case of Visa(Only), use provisionTokenId from the /provision-tokens API response or from Notification request.
@@ -546,6 +577,12 @@ paths:
         - in: header
           name: Timestamp
           description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
           required: true
           schema:
             type: string
@@ -660,6 +697,12 @@ paths:
           schema:
             type: string
         - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
+          required: true
+          schema:
+            type: string
+        - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
           required: true
@@ -756,6 +799,12 @@ paths:
         - in: header
           name: Timestamp
           description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
           required: true
           schema:
             type: string
@@ -859,6 +908,12 @@ paths:
         - in: header
           name: Timestamp
           description: Epoch timestamp in the request initiating system
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Api-Key
+          description: API and Secret key will be provided as part of service boarding.
           required: true
           schema:
             type: string
