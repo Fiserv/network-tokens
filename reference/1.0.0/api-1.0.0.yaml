@@ -352,7 +352,7 @@ paths:
             type: string
         - in: path
           name: tokenReferenceId
-          description: The tokenReferenceId provided in response of /provision-tokens API.
+          description: The tokenReferenceId provided in response of /provision-tokens API. In Case of Visa(Only), use provisionTokenId from the /provision-tokens API response or from Notification request.
           required: true
           schema:
             type: string
@@ -458,7 +458,7 @@ paths:
             type: string
         - in: path
           name: tokenReferenceId
-          description: The tokenReferenceId provided in response of /provision-tokens API.
+          description: The tokenReferenceId provided in response of /provision-tokens API. In Case of Visa(Only), use provisionTokenId from the /provision-tokens API response or from Notification request.
           required: true
           schema:
             type: string
@@ -557,7 +557,7 @@ paths:
             type: string
         - in: path
           name: tokenReferenceId
-          description: The tokenReferenceId provided in response of /provision-tokens API.
+          description: The tokenReferenceId provided in response of /provision-tokens API. In Case of Visa(Only), use provisionTokenId from the /provision-tokens API response or from Notification request.
           required: true
           schema:
             type: string
@@ -767,7 +767,7 @@ paths:
             type: string
         - in: path
           name: tokenReferenceId
-          description: The tokenReferenceId provided in response of /provision-tokens API.
+          description: The tokenReferenceId provided in response of /provision-tokens API. In Case of Visa(Only), use provisionTokenId from the /provision-tokens API response or from Notification request.
           required: true
           schema:
             type: string
