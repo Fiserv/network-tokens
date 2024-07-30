@@ -1331,7 +1331,7 @@ components:
     MerchantInfo:
       description: Information about merchant - Required only for Rupay.
       type: object
-      writeOnly: true
+
       required:
         - merchantId
         - merchantName
@@ -1350,7 +1350,7 @@ components:
     CustomerInfo:
       description: Information about customer - Required Only for Rupay.
       type: object
-      writeOnly: true
+
       required:
         - consumerId
         - isConsumerConsentReceived
@@ -1368,7 +1368,7 @@ components:
     AuthorizationInfo:
       description: Information about Auth transaction - Required Only for Rupay.
       type: object
-      writeOnly: true
+
       required:
         - authRefNo
         - isAFAuthenticated
@@ -1716,9 +1716,9 @@ components:
         - OTHER
 
     TransactionType:
-      description: ECOM-e-commercetransactiontype.Tobe used with web flows.RECURRING-Recurringpayment. If not provided in request, default value will be ECOM
+      description: ECOM-e-commerce transactiontype. To be used with web flows. RECURRING-Recurring payment. If not provided in request, default value will be ECOM
       type: string
-      writeOnly: true
+
       enum:
         - ECOM
         - RECURRING
@@ -1726,7 +1726,7 @@ components:
     PanSource:
       description: Source of the payment instrument (PAN). This enum value specifies the source and the method used to provide the payment instrument data. If not provided in request, default value will be CARD_ON_FILE
       type: string
-      writeOnly: true
+
       enum:
         - CARD_ON_FILE
         - CARD_ADDED_MANUALLY
