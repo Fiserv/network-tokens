@@ -29,7 +29,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -134,7 +134,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -236,7 +236,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -345,7 +345,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -457,7 +457,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -563,7 +563,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -679,7 +679,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -785,7 +785,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -894,7 +894,7 @@ paths:
       parameters:
         - in: header
           name: X-Card-Brand
-          description: Card brand possible values are VI, MC, DI, AX
+          description: Card brand possible values are VI, MC, DI, AX, EO
           required: true
           schema:
             $ref: '#/components/schemas/CardBrand'
@@ -1107,6 +1107,10 @@ components:
           $ref: '#/components/schemas/MerchantInfo'
         customerInfo:
           $ref: '#/components/schemas/CustomerInfo'
+        transactionAmount:
+          type: number
+          example: 20.10
+          description: Transaction Amount, required if Card brand is EO
 
     CryptoGramResponse:
       title: Create CryptoGram response object model.
@@ -1349,12 +1353,17 @@ components:
       writeOnly: true
       required:
         - consumerId
+        - isConsumerConsentReceived
       properties:
         consumerId:
           description: Unique profile Id associated with each customer.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 64
+        isConsumerConsentReceived:
+          description: only required for India specific tokenization.
+          type: boolean
+          example: true
 
     AuthorizationInfo:
       description: Information about Auth transaction - Required Only for Rupay.
@@ -1362,12 +1371,18 @@ components:
       writeOnly: true
       required:
         - authRefNo
+        - isAFAuthenticated
       properties:
         authRefNo:
           description: Unique Auth Id for the transaction created before tokenization.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 36
+        isAFAuthenticated:
+          description: only required for India specific tokenization.
+          type: boolean
+          example: true
+
     GetCardResponse:
       description: Tokenized card details
       type: object
@@ -1683,6 +1698,7 @@ components:
         - DI
         - MC
         - RU
+        - EO
 
     CausedBy:
       description: Who or what caused the Token to be suspended. Must be either the 'CARDHOLDER' (operation requested by the Cardholder) or 'TOKEN_REQUESTOR' (operation requested by the token requestor).
