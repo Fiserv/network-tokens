@@ -1353,7 +1353,7 @@ components:
 
       required:
         - consumerId
-        - isConsumerConsentReceived
+
       properties:
         consumerId:
           description: Unique profile Id associated with each customer.
@@ -1371,7 +1371,7 @@ components:
 
       required:
         - authRefNo
-        - isAFAuthenticated
+
       properties:
         authRefNo:
           description: Unique Auth Id for the transaction created before tokenization.
