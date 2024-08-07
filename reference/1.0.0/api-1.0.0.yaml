@@ -1348,7 +1348,7 @@ components:
           maximum: 45
 
     CustomerInfo:
-      description: Information about customer - Required Only for Rupay.
+      description: Information about customer.
       type: object
 
       required:
@@ -1356,17 +1356,17 @@ components:
 
       properties:
         consumerId:
-          description: Unique profile Id associated with each customer.
+          description: Unique profile Id associated with each customer.Required for Rupay Tokenization Only.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 64
         isConsumerConsentReceived:
-          description: only required for India specific tokenization.
+          description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
-          example: true
+          example: false
 
     AuthorizationInfo:
-      description: Information about Auth transaction - Required Only for Rupay.
+      description: Information about Auth transaction.
       type: object
 
       required:
@@ -1374,14 +1374,14 @@ components:
 
       properties:
         authRefNo:
-          description: Unique Auth Id for the transaction created before tokenization.
+          description: Unique Auth Id for the transaction created before tokenization. Required for Rupay Tokenization Only.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 36
         isAFAuthenticated:
-          description: only required for India specific tokenization.
+          description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
-          example: true
+          example: false
 
     GetCardResponse:
       description: Tokenized card details
@@ -1526,7 +1526,7 @@ components:
           example: "1111"
           readOnly: true
         paymentAccountReferenceId:
-          description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by networks or the Issuer provides PAR in the authorization message response.
+          description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by networks or the Issuer provides PAR in the authorization message response. This is base64 encoded encrypted string.
           type: string
           readOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
@@ -1543,7 +1543,7 @@ components:
           readOnly: true
           example: "MSTF-2901"
         paymentToken:
-          description: The Token for a PAN. This should be used for auth.
+          description: The Token for a PAN. This should be used for auth. This is base64 encoded encrypted sting.
           type: string
           readOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
