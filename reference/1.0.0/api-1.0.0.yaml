@@ -25,7 +25,7 @@ paths:
         - Provision Token
       x-group-name: Network Tokens
       x-proxy-name: Provision Token
-      description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      description: This API will provision a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
           name: X-Card-Brand
@@ -55,6 +55,12 @@ paths:
         - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: X-Key-Id
+          description: This key has to be provided, and this keyId gets generated using the encryption key api
           required: true
           schema:
             type: string
@@ -91,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+               type: string
         '408':
           description: provision response - Request timeout error.
           content:
@@ -194,7 +200,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: string
         '408':
           description: provision response - Request timeout error.
           content:
@@ -1001,7 +1007,7 @@ components:
           example: "8a7f87f68cef0334018cef506da80002"
         tspName:
           $ref: '#/components/schemas/CardBrand'
-    GetPanResposne:
+    GetPanResponse:
       title: Provides the encrypted pan.
       type: object
       properties:
@@ -1069,7 +1075,7 @@ components:
 
 
     TransactionInfo:
-      description: Details about provsion request transaction.
+      description: Details about provision request transaction.
       type: object
       properties:
         clientRequestId:
@@ -1838,11 +1844,14 @@ components:
 
     GetAssetResponse:
       value:
+        mediaContentType: digitalCardArt
+        mediaAltText: digitalCardArt
         mediaContents:
           mimeType: image/png
           data: base64_encoded_string
           height: '283'
           width: '458'
+        cardBrand: VI
 
 
     LifeCycleNotificationRequest:
@@ -1955,6 +1964,7 @@ components:
       value:
         status: "TOKENIZATION_COMPLETED"
         tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
+        tspName: "VI"
 
     KeysResponse:
       value:
