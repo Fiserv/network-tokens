@@ -97,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-               type: string
+               $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
