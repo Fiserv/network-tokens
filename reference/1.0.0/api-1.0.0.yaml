@@ -97,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-               type: string
+                $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
@@ -200,7 +200,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
@@ -1369,7 +1369,7 @@ components:
         isConsumerConsentReceived:
           description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
-          example: false
+          example: true
 
     AuthorizationInfo:
       description: Information about Auth transaction.
@@ -1387,7 +1387,7 @@ components:
         isAFAuthenticated:
           description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
-          example: false
+          example: true
 
     GetCardResponse:
       description: Tokenized card details
@@ -1844,8 +1844,6 @@ components:
 
     GetAssetResponse:
       value:
-        mediaContentType: digitalCardArt
-        mediaAltText: digitalCardArt
         mediaContents:
           mimeType: image/png
           data: base64_encoded_string
