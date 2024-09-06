@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b253bc-3e1c-4dae-92b8-306639411494" name="Changes" comment="changes from network tokens for cof">
+    <list default="true" id="36b253bc-3e1c-4dae-92b8-306639411494" name="Changes" comment="changes from network tokens">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/1.0.0/api-1.0.0.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/reference/1.0.0/api-1.0.0.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,14 +58,18 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "git-widget-placeholder": "develop__portal__launch",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop__portal__launch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/reference/1.0.0" />
@@ -78,6 +83,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649272965053</updated>
+      <workItem from="1723646308972" duration="2718000" />
+      <workItem from="1723749665562" duration="453000" />
+      <workItem from="1724853712299" duration="6521000" />
+      <workItem from="1725377488722" duration="10619000" />
+      <workItem from="1725561493470" duration="1513000" />
     </task>
     <task id="LOCAL-00001" summary="Removed extra header">
       <option name="closed" value="true" />
@@ -175,8 +185,27 @@
       <option name="project" value="LOCAL" />
       <updated>1722907142253</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="changes from network tokens for cof">
+      <option name="closed" value="true" />
+      <created>1722908880742</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1722908880742</updated>
+    </task>
+    <task id="LOCAL-00014" summary="changes from network tokens">
+      <option name="closed" value="true" />
+      <created>1725399579221</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1725399579221</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -201,6 +230,7 @@
     <MESSAGE value="Added specs for CAU" />
     <MESSAGE value="Added specs for locale" />
     <MESSAGE value="changes from network tokens for cof" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes from network tokens for cof" />
+    <MESSAGE value="changes from network tokens" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes from network tokens" />
   </component>
 </project>
