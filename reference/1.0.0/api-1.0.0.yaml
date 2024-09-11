@@ -25,7 +25,7 @@ paths:
         - Provision Token
       x-group-name: Network Tokens
       x-proxy-name: Provision Token
-      description: This API will provison a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
+      description: This API will provision a Network Token for a PAN associated with the underlying issuer and card brands like Visa, Master Card, American Express and Discover.
       parameters:
         - in: header
           name: X-Card-Brand
@@ -55,6 +55,12 @@ paths:
         - in: header
           name: Authorization
           description: Authorization information for the request. Format- `HMAC {hmacToken}`
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: X-Key-Id
+          description: This key has to be provided, and this keyId gets generated using the encryption key api
           required: true
           schema:
             type: string
@@ -91,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+               $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
@@ -1001,7 +1007,7 @@ components:
           example: "8a7f87f68cef0334018cef506da80002"
         tspName:
           $ref: '#/components/schemas/CardBrand'
-    GetPanResposne:
+    GetPanResponse:
       title: Provides the encrypted pan.
       type: object
       properties:
@@ -1069,7 +1075,7 @@ components:
 
 
     TransactionInfo:
-      description: Details about provsion request transaction.
+      description: Details about provision request transaction.
       type: object
       properties:
         clientRequestId:
@@ -1348,7 +1354,7 @@ components:
           maximum: 45
 
     CustomerInfo:
-      description: Information about customer - Required Only for Rupay.
+      description: Information about customer.
       type: object
 
       required:
@@ -1356,17 +1362,17 @@ components:
 
       properties:
         consumerId:
-          description: Unique profile Id associated with each customer.
+          description: Unique profile Id associated with each customer.Required for Rupay Tokenization Only.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 64
         isConsumerConsentReceived:
-          description: only required for India specific tokenization.
+          description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
           example: true
 
     AuthorizationInfo:
-      description: Information about Auth transaction - Required Only for Rupay.
+      description: Information about Auth transaction.
       type: object
 
       required:
@@ -1374,12 +1380,12 @@ components:
 
       properties:
         authRefNo:
-          description: Unique Auth Id for the transaction created before tokenization.
+          description: Unique Auth Id for the transaction created before tokenization. Required for Rupay Tokenization Only.
           type: string
           example: "2d8a1360a24841e1a5677"
           maximum: 36
         isAFAuthenticated:
-          description: only required for India specific tokenization.
+          description: Required for Visa Tokenization for India issued PAN Only.
           type: boolean
           example: true
 
@@ -1526,7 +1532,7 @@ components:
           example: "1111"
           readOnly: true
         paymentAccountReferenceId:
-          description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by networks or the Issuer provides PAR in the authorization message response.
+          description: The unique account reference assigned to the PAN. Conditionally returned if the Token Requestor has opted to receive PAR and providing PAR is assigned by networks or the Issuer provides PAR in the authorization message response. This is base64 encoded encrypted string.
           type: string
           readOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
@@ -1543,7 +1549,7 @@ components:
           readOnly: true
           example: "MSTF-2901"
         paymentToken:
-          description: The Token for a PAN. This should be used for auth.
+          description: The Token for a PAN. This should be used for auth. This is base64 encoded encrypted sting.
           type: string
           readOnly: true
           example: "5001a9f027e5629d11e3949a0800a"
@@ -1843,6 +1849,7 @@ components:
           data: base64_encoded_string
           height: '283'
           width: '458'
+        cardBrand: VI
 
 
     LifeCycleNotificationRequest:
@@ -1955,6 +1962,7 @@ components:
       value:
         status: "TOKENIZATION_COMPLETED"
         tokenReferenceId: "8a7f87f68cef0334018cef506da80002"
+        tspName: "VI"
 
     KeysResponse:
       value:
