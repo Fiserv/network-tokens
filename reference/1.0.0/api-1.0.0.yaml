@@ -309,7 +309,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
@@ -415,7 +415,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Unauthorized'
         '404':
           description: provision response - not found
           content:
@@ -521,7 +521,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Unauthorized'
         '404':
           description: provision response - not found
           content:
@@ -636,7 +636,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Unauthorized'
         '404':
           description: provision response - not found
           content:
@@ -742,7 +742,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Unauthorized'
         '404':
           description: provision response - not found
           content:
@@ -852,7 +852,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Unauthorized'
         '404':
           description: provision response - not found
           content:
@@ -952,7 +952,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Error'
         '408':
           description: provision response - Request timeout error.
           content:
